@@ -38,22 +38,25 @@ tools/synth --slug minimal-vs-batteries --harness pi,deepagents,teensycode
 With no `--harness` it takes every harness in the vault. Pass a subset when the
 note is an argument about particular ones rather than a survey of all.
 
-You get a `## Harnesses` section, one `###` per harness, each listing its
-reading notes with their one-line gists and a `<!-- what it does -->` marker.
+You get a `## Harnesses` section under a `> [!agent] <name> survey` banner: one
+table row per harness, with `Harness` and `Covered by` filled in and the `What
+it is` and `The distinctive move` cells left blank.
 
-**3. Read the notes, then replace each marker.**
+**3. Read the notes, then fill each row.**
 
-Open the reading notes listed under each harness — the gists are a pointer, not
-a source. Replace each marker with two or three sentences:
+Open the reading notes listed under `Covered by` — the links are a pointer, not
+a source. Fill the two empty cells:
 
-- What it is in one clause: who makes it, what layer it sits at.
-- What it actually gives you — the capabilities, concretely. "Subagents,
-  virtual filesystem, human-in-the-loop" beats "a rich feature set".
-- Where it sits relative to the others. The value of a landscape is the
-  contrasts; a list of independent blurbs is just the index with more words.
+- `What it is` in one clause: who makes it, what layer it sits at.
+- `The distinctive move` — the one thing it does differently from the rest.
+  "You subtract capabilities with `excluded_tools` rather than add them" beats
+  "a rich feature set", and it's what makes the landscape read as contrasts
+  rather than a list of independent blurbs.
 
-Keep each one short enough to scan. If a harness deserves more than a
-paragraph, that's a reading note or its own synthesis note.
+The table is for scanning, so it squeezes evidence out. When a row rests on
+specific detail — a benchmark number, a named mechanism — keep a prose
+paragraph below the table rather than losing it to a cell. If a harness
+deserves more than a paragraph, that's a reading note or its own synthesis.
 
 **4. Say what the survey doesn't cover.** Note harnesses you know exist but
 have no reading note for, and harnesses whose coverage is thin. A landscape
