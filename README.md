@@ -1,6 +1,6 @@
 # tales-from-the-agent-loop
 
-![[Pasted image 20261013100357.png]]
+![Simon Stålenhag, Tales from the Loop — cover art](assets/tales-from-the-loop-cover.png)
 
 > I first learned about [Tales from the Loop](https://www.simonstalenhag.se/tftl.html) from this [soundtrack](https://www.youtube.com/watch?v=2PkbfZWqqSw&list=PLEFjGrqW-nqkACZYF5oStYVjqhhsOWtnL) by Philip Glass and Paul Leonard-Morgan. I loved the imagery. It’s about stories from a sci-fi suburbia built on top of The Loop, a deep underground particle accelerator that creates wrinkles in the inhabitants’ lives.
 
