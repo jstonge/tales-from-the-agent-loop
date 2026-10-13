@@ -12,7 +12,7 @@ import vaultlib as vault  # noqa: E402
 
 def main():
     notes = vault.reading_notes()
-    skip = {"README.md", "CLAUDE.md"}  # project files, not notes
+    skip = {"README.md", "CLAUDE.md", "AGENTS.md"}  # project files, not notes
     synthesis = [f.stem for f in sorted(vault.VAULT.glob("*.md")) if f.name not in skip]
     if not notes and not synthesis:
         print("vault is empty")
