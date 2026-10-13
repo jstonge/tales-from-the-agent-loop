@@ -53,6 +53,7 @@ heading by hand.
 | --- | --- |
 | `--slug NAME` | required; filename and H1, no `.md` |
 | `--kind KIND` | `post` `course` `video` `paper` `docs` `repo` `book`; inferred from the URL |
+| `--by NAME` | who made the source; comma-separated, links into `who/` |
 | `--harness NAME` | which system the note is about; comma-separated for comparisons |
 | `--tags a,b` | appended to the template's tags, deduped |
 | `--added-by NAME` | who's adding the note; defaults to `git config user.name` |
@@ -90,6 +91,9 @@ are `video`, arXiv and `.pdf` are `paper`, `/academy/` and `/course/` are
 hosts are `repo`, everything else is `post`. Repo detection is host-anchored, so
 `docs.github.com` stays `docs`. `book` has no URL signature, so pass
 `--kind book`; the URL argument is optional for exactly that case.
+
+`by` is who made the source, as a wikilink into `who/`, so a reading note says
+who wrote it and `who/` collects everything by that person or org.
 
 `harness` is which system a note is *about*, which `kind` can't express — a
 video about Pi is still `kind: video`. Together they let notes be grouped by

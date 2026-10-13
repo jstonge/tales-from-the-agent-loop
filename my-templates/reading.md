@@ -1,6 +1,7 @@
 ---
 topic:
 kind:
+by:
 harness:
 status: unread
 date: "{{date}}"

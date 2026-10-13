@@ -1,6 +1,8 @@
 ---
 topic: coding agent tools
 kind: post
+by:
+  - "[[Hadley Wickham]]"
 harness:
 status: unread
 date: 2026-10-13

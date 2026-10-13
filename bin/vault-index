@@ -30,6 +30,12 @@ def main():
         print(f"\nWHO ({len(who)}):")
         print("  " + " · ".join(who))
 
+    if authors := vault.by_author(notes):
+        print("\nBY AUTHOR:")
+        width = max(len(a) for a in authors)
+        for name, ns in authors.items():
+            print(f"  {name:<{width}}  {len(ns)}")
+
     if groups := vault.by_harness(notes):
         print("\nBY HARNESS:")
         width = max(len(h) for h in groups)

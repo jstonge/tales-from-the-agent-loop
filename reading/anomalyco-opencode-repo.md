@@ -1,6 +1,8 @@
 ---
 topic:
 kind: repo
+by:
+  - "[[Anomaly]]"
 harness:
   - opencode
 status: unread

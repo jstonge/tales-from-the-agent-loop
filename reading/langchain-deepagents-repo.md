@@ -1,6 +1,8 @@
 ---
 topic: agent harness
 kind: repo
+by:
+  - "[[LangChain]]"
 harness:
   - deepagents
 status: unread

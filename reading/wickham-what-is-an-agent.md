@@ -1,6 +1,8 @@
 ---
 topic:
 kind: post
+by:
+  - "[[Hadley Wickham]]"
 harness:
 status: read
 date: 2026-10-13

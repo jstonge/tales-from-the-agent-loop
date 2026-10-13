@@ -1,6 +1,8 @@
 ---
 topic: tool design
 kind: post
+by:
+  - "[[Anthropic]]"
 harness:
 status: unread
 date: 2026-10-13

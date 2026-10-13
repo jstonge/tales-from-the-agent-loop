@@ -1,6 +1,8 @@
 ---
 topic:
 kind: repo
+by:
+  - "[[Alishahryar1]]"
 harness:
   - claude-code
 status: unread

@@ -1,6 +1,8 @@
 ---
 topic:
 kind: video
+by:
+  - "[[Sam Witteveen]]"
 harness:
 status: unread
 date: 2026-10-13

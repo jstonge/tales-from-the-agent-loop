@@ -1,6 +1,8 @@
 ---
 topic:
 kind: video
+by:
+  - "[[IndyDevDan]]"
 harness:
   - pi
   - claude-code

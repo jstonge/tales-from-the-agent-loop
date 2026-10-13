@@ -155,6 +155,17 @@ If someone asks you to record a take on their behalf, write it under their
 heading in that form, creating the heading if it's absent — and never under
 someone else's. Use the date they wrote it, not the note's creation date. The same goes for `status:` — see below.
 
+## By
+
+`--by "<name>"` records who made the source, as a wikilink into `who/`.
+Comma-separated when there's more than one. Check `bin/vault-index` for the
+existing spelling before adding a name — `LangChain` and `langchain` would split
+the same author in two.
+
+If `who/<name>.md` doesn't exist yet, the link dangles until someone writes it.
+That's fine and is how the folder grows; mention it to the user rather than
+leaving it silent.
+
 ## Harness
 
 Set `--harness <name>` when the source is about a nameable system: `deepagents`,

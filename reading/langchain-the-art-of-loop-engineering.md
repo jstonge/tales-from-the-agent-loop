@@ -1,6 +1,8 @@
 ---
 topic:
 kind: post
+by:
+  - "[[LangChain]]"
 harness:
 status: unread
 date: 2026-10-13

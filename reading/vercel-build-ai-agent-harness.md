@@ -1,6 +1,8 @@
 ---
 topic:
 kind: course
+by:
+  - "[[Vercel]]"
 harness:
   - teensycode
 status: read

@@ -123,6 +123,8 @@ def main():
     ap.add_argument("--tags", default="", help="comma-separated, appended and deduped")
     ap.add_argument("--added-by", default="",
                     help="who's adding the note (default: git user.name, else whoami)")
+    ap.add_argument("--by", default="",
+                    help="who made the source; comma-separated, links into who/")
     ap.add_argument("--harness", default="",
                     help="which system the note is about, e.g. deepagents or pi,claude-code")
     ap.add_argument("--set", default=[], action="append", metavar="KEY=VALUE",
@@ -172,6 +174,10 @@ def main():
     if args.harness:
         names = [h.strip() for h in args.harness.split(",") if h.strip()]
         fields["harness"] = "".join(f"\n  - {h}" for h in names)
+    if args.by:
+        # wikilinks so the property is clickable and shows in the graph
+        names = [b.strip() for b in args.by.split(",") if b.strip()]
+        fields["by"] = "".join(f'\n  - "[[{b}]]"' for b in names)
     if args.url:
         fields["sourceUrl"] = args.url
     if copy.exists():

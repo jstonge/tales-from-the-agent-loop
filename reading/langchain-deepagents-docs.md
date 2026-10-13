@@ -1,6 +1,8 @@
 ---
 topic: agent harness
 kind: docs
+by:
+  - "[[LangChain]]"
 harness:
   - deepagents
 status: unread

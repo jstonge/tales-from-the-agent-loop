@@ -28,6 +28,14 @@ def listed(fields, key):
     return [v] if isinstance(v, str) and v else list(v)
 
 
+def linked(fields, key):
+    """A list field whose values are wikilinks, as plain names."""
+    out = []
+    for raw in listed(fields, key):
+        out.append(raw.strip('"').strip("[]").split("|")[0].split("/")[-1])
+    return out
+
+
 def gist(body, limit=110):
     """The note's first sentence — Claude's summary, else the author's own text."""
     m = re.search(r"(?ms)^# .*?\n(.*?)^## ", body)
@@ -50,6 +58,15 @@ def reading_notes():
         body = f.read_text(encoding="utf-8")
         out.append((f.stem, frontmatter(body), gist(body)))
     return out
+
+
+def by_author(notes=None):
+    """author name -> [(slug, fields, gist)], most-covered first."""
+    groups = {}
+    for slug, fields, g in notes if notes is not None else reading_notes():
+        for b in linked(fields, "by"):
+            groups.setdefault(b, []).append((slug, fields, g))
+    return dict(sorted(groups.items(), key=lambda kv: (-len(kv[1]), kv[0])))
 
 
 def by_harness(notes=None):

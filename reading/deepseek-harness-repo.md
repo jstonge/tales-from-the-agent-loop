@@ -1,6 +1,8 @@
 ---
 topic:
 kind: repo
+by:
+  - "[[DeepSeek]]"
 harness:
   - deepseek-harness
 status: unread
