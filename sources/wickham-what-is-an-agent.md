@@ -1,0 +1,189 @@
+---
+sourceUrl: https://tidydesign.substack.com/p/what-is-an-agent
+fetched: 2026-10-13
+source: article text
+---
+
+I thought it might be useful to talk about what exactly an agent is, because there’s a lot of mystery hiding behind a fairly straightforward idea. Once you understand that idea, you’ll better understand how tools like Claude Code work and start to see how you could build your own.
+
+To understand what an agent is, you first need to understand what a tool call is. And to understand a tool call, you need to understand the basic human \<-> LLM conversational loop. So we’ll start there and then work our way back up.
+
+## **Conversation basics**
+
+A conversation with an LLM is a sequence of HTTP requests and HTTP responses: you say something then the LLM responds. LLMs (like pretty much all modern web APIs) communicate with JSON. So when you send a request to Claude (my personal favourite LLM), the request body includes some JSON like this:
+
+```
+"role": "user",
+"content": [
+  {
+    "type": "text",
+    "text": "Tell me a joke",
+  }
+]
+```
+(I’ve trimmed these snippets for readability. That means they’re not valid JSON, but should give you the flavour of what’s going on under the hood.)
+
+This message is from the user (me, the human) and includes *text* asking Claude to tell me a joke. Then Claude sends a message back:
+
+```
+"role": "assistant",
+"content": [
+  {
+    "type": "text",
+    "text": "Why don't scientists trust atoms?\n\nBecause they make up everything!"
+  }
+]
+```
+This message is from the assistant (Claude) and gives the joke I requested in text format.
+
+We call each of these two messages a **turn**. Turns always come in pairs and always happen in the same order: user then assistant. The LLM will always listen to everything you have to say, and only then respond. (This is something we can all strive for in our own conversations 😆.)
+
+It’s worth noting that the LLM API is stateless. That means if we continue this conversation, we have to resend the entire conversation so far:
+
+```
+messages: [
+  {
+    "role": "user",
+    "content": [
+      {
+        "type": "text",
+        "text": "Tell me a joke",
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": [
+      {
+        "type": "text",
+        "text": "Why don't..."
+      }
+    ]
+  }
+]
+```
+This is why token costs grow over the course of a conversation; each new request has to include the contents of all the previous turns.
+
+## **Tools**
+
+Things get more complicated when we introduce tools. Tools are a way for LLMs to break free from their limits: they allow LLMs to get data about the world as it is today and allow them to take actions. But what exactly is a tool? A **tool** is just a different name for a function, but importantly it’s a function that’s run on your computer.
+
+Let’s see how that works in ellmer by registering a very simple tool:
+
+```
+chat <- chat_claude(model = "claude-sonnet-4-5")
+chat$register_tool(tool(
+  \() Sys.Date(),
+  name = "today",
+  description = "Get today's date"
+))
+```
+Now we can use the tool to allow Claude to answer a question that cannot be part of its training data: today’s date. So our request includes a description of that tool:
+
+```
+"tools": [
+  {
+    "name": "today",
+    "description": "Get today's date",
+    "input_schema": {
+      "type": "object",
+      "description": "",
+    }
+  }, 
+]
+```
+(This is everything the model knows about the tool, which is why writing a good description is important for more complex tools.)
+
+Then the request continues as before:
+
+```
+"role": "user",
+"content": [
+  {
+    "type": "text",
+    "text": "What day is it today?",
+  }
+]
+```
+Claude can’t respond immediately because it doesn’t know the answer. So instead it responds with type “tool\_use”:
+
+```
+"role": "assistant",
+"content": [
+  {
+    "type": "tool_use",
+    "id": "toolu_012g5Pv3hqogjmTSWFpwPPnE",
+    "name": "today",
+    "input": {}
+  }
+]
+```
+This is a request for you to do some work, i.e. call the `today()` function with no arguments. This workflow wouldn’t be very appealing if you personally had to call this function, which is where the harness comes in. A **harness** is a program that wraps around the raw LLM and can (among other things) run these local functions for you. Harnesses include the web chat interface, more complicated tools like Claude Code or Codex, and in this case, ellmer.
+
+So now ellmer takes over, sending a new message back to the assistant that contains the results of calling `today()`. It also includes the complete prior conversational history, but I’ve omitted that to stay focused on what’s changed:
+
+```
+"role": "user",
+"content": [
+  {
+    "type": "tool_result",
+    "tool_use_id": "toolu_012g5Pv3hqogjmTSWFpwPPnE",
+    "content": "2026-06-01",
+    "is_error": false
+  }
+]
+```
+(The role here is a little confusing; it would be clearer to say that this response was generated by the harness, rather than the user.)
+
+Now that Claude knows what day it is, it can respond to our initial query:
+
+```
+"role": "assistant",
+"content": [
+  {
+    "type": "text",
+    "text": "Today is **Monday, June 1st, 2026**."
+  }
+]
+```
+We call the complete sequence of human, harness, and LLM turns a **round**, which in this case consists of four turns/two pairs (human -> LLM, harness -> LLM).
+
+## **So what’s an agent?**
+
+With all these pieces in place we can now define an agent. An **agent** is an LLM, in a harness, that calls tools repeatedly in a loop, deciding each next step from the last result. Most agents have two types of tools: **read** tools that can observe the world, and **write** tools that can change the world. This combination leads to a natural iterative cycle where the LLM does some initial exploration (read), makes a change (write), observes the result of the change (read), etc etc. That’s why our example above wasn’t an agent; there’s no need for iteration.
+
+So now let’s make a real, if simple, agent. The goal of this agent is to help you delete files. So we give it a read tool that lists the files in the current directory and a write tool that deletes files:
+
+```
+chat <- chat_claude(model = "claude-sonnet-4-5")
+chat$register_tool(tool(
+  function() dir(),
+  name = "ls",
+  description = "Lists the files in the current directory"
+))
+chat$register_tool(tool(
+  function(path) unlink(path),
+  name = "rm",
+  description = "Delete a file",
+  arguments = list(path = type_string())
+))
+```
+Now we can use the agent to effect change in the world:
+
+`chat$chat("Delete all the csv files in the current directory")`
+I won’t show the full sequence of JSON requests and responses here because it’s a bit long, but in summary it looks like this:
+
+- User: Delete all the csv files in the current directory.
+- Claude: Run the `ls()` tool
+- ellmer: `a.csv`, `b.csv`, `a.R`, `b.R`, `c.R`
+- Claude: \[Run `rm("a.csv")`, Run `rm("b.csv")`\]
+- ellmer: \[`TRUE`, `TRUE`\]
+- Claude: I’ve deleted two csv files for you.
+
+This is one round made up of six turns/three pairs (human-LLM, harness-LLM, harness-LLM).
+
+Now let’s talk about the elephant in the room: I just gave an LLM the ability to delete files on my computer! Hopefully you find this a little worrying, as we know that LLMs are never 100% trustworthy.
+
+This is one of the biggest challenges of agents. An agent isn’t useful unless it can take actions on your behalf, but how do you know it’s always taking the right actions? This is one of the biggest questions posed by AI agents. There are some things you can do locally to protect yourself when the agent is scoped to actions on your computer, like sandboxing, using git, and making backups. But what if actions are in the real world like sending emails or spending money? That feels high risk to me!
+
+As usual, I’d love to know how this article landed with you. Did you learn something new or is this old hat? What questions are you left wondering about?

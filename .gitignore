@@ -1,0 +1,14 @@
+# Personal UI state — changes constantly and would fight Obsidian Sync
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/appearance.json
+.obsidian/graph.json
+
+# Machine-local Claude Code settings
+.claude/settings.local.json
+
+.DS_Store
+
+# Python bytecode
+__pycache__/
+*.pyc
