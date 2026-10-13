@@ -10,10 +10,10 @@ sourceUrl: https://docs.langchain.com/oss/python/deepagents/overview
 recBy:
 tags:
   - agent-patterns
-localCopy: "[[sources/langchain-deepagents|archived copy]]"
+localCopy: "[[sources/langchain-deepagents-docs|archived copy]]"
 ---
 
-# langchain-deepagents
+# langchain-deepagents-docs
 
 Claude summary:
 
