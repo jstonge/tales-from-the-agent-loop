@@ -134,14 +134,16 @@ no note that gathers them, which is usually where a structure note belongs.
 The conventions live in [`AGENTS.md`](../AGENTS.md), which Codex, Cursor,
 Copilot and others read directly; `CLAUDE.md` is a one-line pointer to it.
 
-Two skills wrap the tools below — `vault-note` turns a URL into a reading note,
-`vault-synthesis` builds a survey across them. Cloning the repo is enough for
+Three skills wrap the tools below — `vault-note` turns a URL into a reading
+note, `vault-synthesis` builds a survey across them, and `vault-review` gives
+hints on one of your atomic notes without editing it. Cloning the repo is enough for
 Claude Code, which loads `.claude/skills/` automatically. For any other agent,
 install them where that agent looks:
 
 ```sh
 npx skills add jstonge/tales-from-the-agent-loop --skill vault-note --agent codex
 npx skills add jstonge/tales-from-the-agent-loop --skill vault-synthesis --agent codex
+npx skills add jstonge/tales-from-the-agent-loop --skill vault-review --agent codex
 ```
 
 `--agent` takes `codex`, `cursor`, `opencode`, `github-copilot`, `gemini-cli`,

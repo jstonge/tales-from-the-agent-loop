@@ -37,15 +37,13 @@ across them — see [`current-harnesses`](synthesis/current-harnesses.md).
 
 When you have something to say that isn't about any one source, start an
 atomic note at the root instead — one idea per note, linked to the others and
-to the reading it rests on:
-
-```sh
-tools/note --slug what-minimal-buys-you --template atomic-notes
-```
-
-It fills in the date and your name. The whole note is yours; nothing else
-writes there. `tools/vault-index` shows which of your notes nothing links to,
-which link nowhere, and which cite no reading.
+to the reading it rests on. In Obsidian, make a new note, run **Templates:
+Insert template** from the command palette (Cmd+P), pick `atomic-notes`, and
+put your name in `addedBy`. The whole note is yours; nothing else writes there.
+`tools/vault-index` shows which of your notes nothing links to, which link
+nowhere, and which cite no reading. For hints on one note — whether it stands
+on its own, makes a claim, and links to what it rests on — ask for
+`/vault-review <note>`. It answers in chat and never edits the note.
 
 Under the hood, the work splits in two: the skill is prose telling the agent
 what to do, and the tool does only what doesn't need judgment. Nothing in
@@ -67,7 +65,7 @@ flowchart TD
 
 `my-templates/` has two consumers, not one: Obsidian's Templates plugin points
 at the same folder, so adding a field to `reading.md` changes both what the tool
-emits and what you get pressing Cmd+T, with no code change.
+emits and what you get from **Insert template**, with no code change.
 
 Where things live:
 
@@ -85,6 +83,7 @@ agent looks and tell it whose name to sign with:
 ```sh
 npx skills add jstonge/tales-from-the-agent-loop --skill vault-note --agent codex
 npx skills add jstonge/tales-from-the-agent-loop --skill vault-synthesis --agent codex
+npx skills add jstonge/tales-from-the-agent-loop --skill vault-review --agent codex
 export VAULT_AGENT=Codex
 ```
 
