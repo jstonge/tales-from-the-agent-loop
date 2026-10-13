@@ -74,6 +74,13 @@ tools/note --slug harness-design-space --template synthesis
 ```
 
 scaffolds one at the root with the date and your name already filled in.
+`synthesis/` holds surveys compiled across the reading notes by `tools/synth`.
+The vault root is for your own thinking — written, not compiled:
+
+```sh
+tools/note --slug what-minimal-buys-you --template thinking
+```
+
 `who/` holds people and organisations — who they are, what they've made,
 and which notes here cover them:
 

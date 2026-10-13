@@ -1,12 +1,16 @@
 ---
 name: vault-synthesis
-description: Build a synthesis note at the vault root that surveys what's in reading/ — most often "which harnesses are out there and what do they do", but equally a note comparing two approaches or pulling together everything on one theme. Use this whenever the user asks what tools or systems the vault covers, wants a landscape or overview or state-of-play, asks to compare several things they've read about, or wants to pull scattered reading notes together into one place. Distinct from vault-note, which turns a single URL into a single reading note.
+description: Build a synthesis note in `synthesis/` that surveys what's in reading/ — most often "which harnesses are out there and what do they do", but equally a note comparing two approaches or pulling together everything on one theme. Use this whenever the user asks what tools or systems the vault covers, wants a landscape or overview or state-of-play, asks to compare several things they've read about, or wants to pull scattered reading notes together into one place. Distinct from vault-note, which turns a single URL into a single reading note.
 ---
 
 # Vault synthesis
 
 A reading note answers "what does this source say". A synthesis note answers
 "what's out there, and what is it". This builds the second from the first.
+
+These land in `synthesis/`, not the vault root. The root is for the user's own
+thinking — written, not compiled — and a generated survey sitting there would
+blur the one distinction the layout exists to keep.
 
 `tools/synth` assembles the skeleton; you write the prose. That division is the
 same one `tools/note` uses, and for the same reason: the tool can group notes

@@ -26,10 +26,10 @@ from vaultlib import identity  # noqa: E402
 VAULT = Path(__file__).resolve().parent.parent
 TODAY = date.today().isoformat()
 IS_VIDEO = re.compile(r"youtube\.com|youtu\.be")
-FOLDERS = {"reading": "reading", "who": "who"}
+FOLDERS = {"reading": "reading", "who": "who", "synthesis": "synthesis"}
 # templates whose body is someone's take, and so gets a heading per author.
 # A who note is shared reference — nobody owns a paragraph of it.
-AUTHORED = {"reading", "synthesis"}
+AUTHORED = {"reading", "synthesis", "thinking"}
 
 # Source kinds, matched in order; anything unrecognised is a plain blog post.
 # "book" has no URL signature, so it has to be passed explicitly.
@@ -135,7 +135,7 @@ def main():
     args = ap.parse_args()
 
     # the template decides where the note lands; anything unlisted is the
-    # user's own writing and belongs at the vault root
+    # user's own thinking, which belongs at the vault root
     is_reading = args.template == "reading"
     kind = args.kind or infer_kind(args.url)
     tpl = VAULT / "my-templates" / f"{args.template}.md"

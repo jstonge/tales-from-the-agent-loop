@@ -13,16 +13,22 @@ import vaultlib as vault  # noqa: E402
 def main():
     notes = vault.reading_notes()
     skip = {"README.md", "CLAUDE.md", "AGENTS.md"}  # project files, not notes
-    synthesis = [f.stem for f in sorted(vault.VAULT.glob("*.md")) if f.name not in skip]
-    if not notes and not synthesis:
+    thinking = [f.stem for f in sorted(vault.VAULT.glob("*.md")) if f.name not in skip]
+    synthesis = [f.stem for f in sorted((vault.VAULT / "synthesis").glob("*.md"))]
+    if not notes and not synthesis and not thinking:
         print("vault is empty")
         return
 
     tags = sorted({t for _, f, _ in notes for t in vault.listed(f, "tags")})
     print("TAGS IN USE:", ", ".join(tags) or "(none)")
 
-    if synthesis:
+    if thinking:
         print("\nYOUR NOTES (vault root):")
+        for name in thinking:
+            print(f"  {name}")
+
+    if synthesis:
+        print("\nSYNTHESIS:")
         for name in synthesis:
             print(f"  {name}")
 

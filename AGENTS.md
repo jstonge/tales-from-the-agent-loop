@@ -51,7 +51,8 @@ section below the table rather than losing it to a cell.
 
 ## Where notes live
 
-- vault root — your own synthesis notes, written across sources
+- vault root — your own thinking, written rather than compiled
+- `synthesis/` — surveys compiled across the reading notes, made by `tools/synth`
 - `reading/` — one note per source, made by `tools/note`
 - `who/` — people and organisations: who they are and what they've made
 - `sources/` — archived full text of what was read; nobody's words but the author's

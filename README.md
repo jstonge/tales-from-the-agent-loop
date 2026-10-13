@@ -33,7 +33,7 @@ name and dated, so two of us can write in one note without overwriting each
 other.
 
 Once there are enough notes to compare, `/vault-synthesis` builds a survey
-across them — see [`current-harnesses`](current-harnesses.md).
+across them — see [`current-harnesses`](synthesis/current-harnesses.md).
 
 Under the hood, the work splits in two: the skill is prose telling the agent
 what to do, and the tool does only what doesn't need judgment. Nothing in
@@ -49,7 +49,8 @@ flowchart TD
     note --> reading["reading/<br/>one note per source"]
     note --> sources["sources/<br/>archived full text"]
     reading --> synth["tools/synth<br/>survey across notes"]
-    synth --> root["your own notes<br/>at the vault root"]
+    synth --> surveys["synthesis/<br/>compiled surveys"]
+    surveys -.-> root["the vault root<br/>your own thinking"]
 ```
 
 `my-templates/` has two consumers, not one: Obsidian's Templates plugin points
@@ -62,8 +63,9 @@ Where things live:
 | --- | --- |
 | `reading/` | one note per thing read |
 | `who/` | the people and organisations behind them |
+| `synthesis/` | surveys compiled across the reading notes |
 | `sources/` | archived full text, so nothing depends on a live URL |
-| the root | our own notes, written across sources |
+| the root | our own thinking, written rather than compiled |
 
 If you work with something other than Claude Code, install the skills where your
 agent looks and tell it whose name to sign with:
