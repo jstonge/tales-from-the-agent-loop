@@ -53,7 +53,10 @@ def main():
     dest = Path(res.stdout.strip().split("\n")[-1])
 
     # labelled, because an unmarked survey reads as the user's own conclusion
-    block = ["## Harnesses\n", "Claude survey:\n",
+    block = ["## Harnesses\n",
+             "> [!claude] Claude survey",
+             "> Assembled from the reading notes linked below. Argue with it under"
+             " Thinking rather than editing it into agreement.\n",
              "| Harness | What it is | The distinctive move | Covered by |",
              "| --- | --- | --- | --- |"]
     for harness, notes in groups.items():

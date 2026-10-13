@@ -57,8 +57,8 @@ that doesn't mark its own edges reads as complete when it isn't.
 
 ## Attribution
 
-Everything `bin/synth` generates sits under a `Claude survey:` label, and
-anything you add to those sections stays under it. See `CLAUDE.md` — the rule
+Everything `bin/synth` generates sits under a `> [!claude] Claude survey`
+banner, and anything you add to those sections stays under one. See `CLAUDE.md` — the rule
 across this vault is that no unlabelled prose is Claude's, because two people
 are writing here and an unattributed paragraph quietly becomes something "we
 think".

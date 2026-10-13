@@ -2,11 +2,16 @@
 
 ## Mark what Claude wrote
 
-Anything Claude produces in this vault carries a label, so a reader can tell at
-a glance whose words they're reading. Reading notes use `Claude summary:` above
-a blockquote; generated sections of a synthesis note use `Claude survey:` above
-the block. The rule is not the exact wording — it's that no unlabelled prose in
-this vault should be Claude's.
+Anything Claude produces in this vault sits in a `[!claude]` callout, so a
+reader can tell at a glance whose words they're reading — orange, with a bot
+icon, styled by `.obsidian/snippets/claude-callout.css`. Reading notes use
+`> [!claude] Claude summary`; generated sections of a synthesis note use
+`> [!claude] Claude survey` as a banner above the block. The rule is not the
+exact wording — it's that no unlabelled prose in this vault should be Claude's.
+
+The snippet has to be enabled once per machine: Settings → Appearance → CSS
+snippets. Without it the callout still renders, just in the default blue. On
+GitHub it degrades to a plain blockquote showing the literal `[!claude]`.
 
 This matters more than it looks. Two people are writing here to decide what to
 build, and an unattributed paragraph silently becomes something "we think". If

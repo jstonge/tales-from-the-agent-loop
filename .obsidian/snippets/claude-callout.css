@@ -1,0 +1,6 @@
+/* A callout type for anything Claude wrote, so generated prose is visibly
+   distinct from what a human argued. See CLAUDE.md. */
+.callout[data-callout="claude"] {
+    --callout-color: 230, 126, 34;
+    --callout-icon: lucide-bot;
+}

@@ -186,8 +186,9 @@ def main():
     summary = "" if sys.stdin.isatty() else sys.stdin.read().strip()
     if summary:
         quoted = "\n".join(f"> {ln}" if ln.strip() else ">" for ln in summary.split("\n"))
-        block = f"Claude summary:\n\n{quoted}"
-        body = re.sub(r"(?m)^Claude summary:\n\n(?:>.*\n)+\n*", "", body)
+        block = f"> [!claude] Claude summary\n{quoted}"
+        body = re.sub(r"(?m)^(?:> \[!claude\].*\n)?(?:Claude summary:\n\n)?(?:>.*\n)+\n*",
+                      "", body)
         body = re.sub(rf"^(# {re.escape(args.slug)}\n)\n*",
                       lambda m: f"{m.group(1)}\n{block}\n\n", body, count=1, flags=re.M)
 

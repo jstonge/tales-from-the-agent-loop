@@ -127,7 +127,7 @@ reading every file gets slower every time the vault grows.
 
 ## Attribution
 
-The `Claude summary:` label and its blockquote are not decoration. See
+The `> [!claude] Claude summary` callout is not decoration. See
 `CLAUDE.md`: no unlabelled prose in this vault is Claude's. If you add anything
 to a note beyond the summary, label it the same way.
 
