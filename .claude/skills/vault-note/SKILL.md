@@ -166,6 +166,12 @@ If `who/<name>.md` doesn't exist yet, the link dangles until someone writes it.
 That's fine and is how the folder grows; mention it to the user rather than
 leaving it silent.
 
+When you do write one, the archives usually carry only what a source reveals
+about its own author — often just a GitHub handle. A web search for background
+is appropriate here, but mark it: per `CLAUDE.md`, anything not from `sources/`
+says so with the date it was looked up, because star counts and funding rounds
+go stale in a way an archived article doesn't.
+
 ## Harness
 
 Set `--harness <name>` when the source is about a nameable system: `deepagents`,

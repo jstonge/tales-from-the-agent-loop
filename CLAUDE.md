@@ -20,6 +20,17 @@ a section is assembled rather than argued, say so and let it be argued with.
 Sections under an `### <author name>` heading are that person's, always. Claude
 never writes there, and never flips `status:`.
 
+## Say where a fact came from
+
+The vault's own archives in `sources/` are checkable — anyone can open the file
+and see whether a summary is fair. A fact from a web search isn't, and it ages
+differently: funding rounds, star counts and release dates go stale in a way
+that an archived article doesn't.
+
+So when a note carries background that isn't in `sources/`, say so in the block,
+with the date it was looked up. It costs one line and tells a future reader
+which claims to re-check.
+
 ## Tables for surveys
 
 When a synthesis note surveys several things side by side, default to a table —
