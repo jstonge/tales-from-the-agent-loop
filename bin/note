@@ -25,9 +25,9 @@ from vaultlib import identity  # noqa: E402
 VAULT = Path(__file__).resolve().parent.parent
 TODAY = date.today().isoformat()
 IS_VIDEO = re.compile(r"youtube\.com|youtu\.be")
-FOLDERS = {"reading": "reading", "entity": "entity"}
+FOLDERS = {"reading": "reading", "who": "who"}
 # templates whose body is someone's take, and so gets a heading per author.
-# An entity note is shared reference — nobody owns a paragraph of it.
+# A who note is shared reference — nobody owns a paragraph of it.
 AUTHORED = {"reading", "synthesis"}
 
 # Source kinds, matched in order; anything unrecognised is a plain blog post.

@@ -34,7 +34,7 @@ section below the table rather than losing it to a cell.
 
 - vault root — your own synthesis notes, written across sources
 - `reading/` — one note per source, made by `bin/note`
-- `entity/` — people and organisations: who they are and what they've made
+- `who/` — people and organisations: who they are and what they've made
 - `sources/` — archived full text of what was read; nobody's words but the author's
 
 `bin/note` routes on `--template`, so a new shape is a template file plus an

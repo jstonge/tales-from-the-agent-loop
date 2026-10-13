@@ -25,6 +25,10 @@ def main():
         for name in synthesis:
             print(f"  {name}")
 
+    if who := sorted(f.stem for f in (vault.VAULT / "who").glob("*.md")):
+        print(f"\nWHO ({len(who)}):")
+        print("  " + " · ".join(who))
+
     if groups := vault.by_harness(notes):
         print("\nBY HARNESS:")
         width = max(len(h) for h in groups)
