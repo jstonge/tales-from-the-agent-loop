@@ -10,10 +10,50 @@ In this project, we learn about that emerging Agent Loop from a humanistic persp
 
 ## How to get started
 
-Clone this repo, open it as obsidian vault. Right now, there's 3 skills :
+Clone it and open the folder as a vault in [Obsidian](https://obsidian.md).
+
+```sh
+git clone https://github.com/jstonge/tales-from-the-agent-loop.git
 ```
-npx
+
+One setup step: **Settings → Appearance → CSS snippets → enable `agent-callout`**.
+That's what tints agent-written blocks orange, so you can tell at a glance which
+prose is a person's and which a machine's.
+
+To add something you've read, hand your agent the link:
+
 ```
+/vault-note https://tidydesign.substack.com/p/what-is-an-agent
+```
+
+It fetches the page, saves a readable copy into `sources/` so the note outlives
+the link, fills in the frontmatter, and drafts a summary. The summary is marked
+as the agent's. `## Why do I bring this up?` is left for you, under your own
+name and dated, so two of us can write in one note without overwriting each
+other.
+
+Once there are enough notes to compare, `/vault-synthesis` builds a survey
+across them — see [`current-harnesses`](current-harnesses.md).
+
+Where things live:
+
+| | |
+| --- | --- |
+| `reading/` | one note per thing read |
+| `who/` | the people and organisations behind them |
+| `sources/` | archived full text, so nothing depends on a live URL |
+| the root | our own notes, written across sources |
+
+If you work with something other than Claude Code, install the skills where your
+agent looks and tell it whose name to sign with:
+
+```sh
+npx skills add jstonge/tales-from-the-agent-loop --skill vault-note --agent codex
+export VAULT_AGENT=Codex
+```
+
+The conventions are in [AGENTS.md](AGENTS.md), and the CLI underneath the skills
+is documented in [bin/README.md](bin/README.md).
 
 ## Conceptually, what are we doing?
 
