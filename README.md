@@ -35,6 +35,16 @@ other.
 Once there are enough notes to compare, `/vault-synthesis` builds a survey
 across them — see [`current-harnesses`](synthesis/current-harnesses.md).
 
+When you have something to say that isn't about any one source, start a note at
+the root instead:
+
+```sh
+tools/note --slug what-minimal-buys-you --template thinking
+```
+
+It fills in the date and your name and opens a section under your own heading.
+Nothing writes there but you.
+
 Under the hood, the work splits in two: the skill is prose telling the agent
 what to do, and the tool does only what doesn't need judgment. Nothing in
 `tools/` calls a model — if it had to think, your notes would depend on it
