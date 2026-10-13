@@ -70,10 +70,12 @@ compiled, with no `sourceUrl`, no archive and no `kind`, just links out to the
 reading notes it draws on:
 
 ```sh
-tools/note --slug what-minimal-buys-you --template thinking
+tools/note --slug what-minimal-buys-you --template atomic-notes
 ```
 
-scaffolds one with the date and your name already filled in.
+scaffolds an atomic note — one idea, one author — with the date and your name
+already filled in. It gets no `### <author>` heading: the whole note is
+whoever's in `addedBy`.
 
 `who/` holds people and organisations — who they are, what they've made,
 and which notes here cover them:
@@ -122,7 +124,10 @@ wrote under `## Why do I bring this up?` survive, and an existing
 `> [!agent] … summary` callout is replaced rather than duplicated.
 
 `tools/vault-index` prints the tag vocabulary,
-the grouping by harness, and a one-line gist per note.
+the grouping by harness, and a one-line gist per note. For your notes at the
+root it also counts links in, links out and reading notes cited, and flags the
+ones at zero — plus any group of three or more notes linked to each other with
+no note that gathers them, which is usually where a structure note belongs.
 
 ## Working on this vault with an agent
 

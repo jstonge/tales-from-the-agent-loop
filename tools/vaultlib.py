@@ -5,6 +5,8 @@ from pathlib import Path
 
 VAULT = Path(__file__).resolve().parent.parent
 READING = VAULT / "reading"
+NOT_NOTES = {"README.md", "CLAUDE.md", "AGENTS.md"}  # project files at the root
+WIKILINK = re.compile(r"\[\[([^\]|#]+)")
 
 
 def frontmatter(body):
@@ -38,7 +40,8 @@ def linked(fields, key):
 
 def gist(body, limit=110):
     """The note's first sentence — Claude's summary, else the author's own text."""
-    m = re.search(r"(?ms)^# .*?\n(.*?)^## ", body)
+    # an atomic note has no ## section, so its whole body is the text
+    m = re.search(r"(?ms)^# .*?\n(.*?)(?:^## |\Z)", body)
     text = m[1].strip() if m else ""
     # drop the callout header (`> [!agent] Claude summary`) or the older
     # `Claude summary:` label, so the gist starts at the summary itself
@@ -59,6 +62,22 @@ def reading_notes():
         body = f.read_text(encoding="utf-8")
         out.append((f.stem, frontmatter(body), gist(body)))
     return out
+
+
+def root_notes():
+    """[(slug, fields, gist)] for your own notes at the vault root."""
+    out = []
+    for f in sorted(VAULT.glob("*.md")):
+        if f.name not in NOT_NOTES:
+            body = f.read_text(encoding="utf-8")
+            out.append((f.stem, frontmatter(body), gist(body)))
+    return out
+
+
+def links(body):
+    """Names of the notes a body links to — Obsidian resolves by filename, so
+    folder, heading and alias are dropped."""
+    return {m.strip().split("/")[-1] for m in WIKILINK.findall(body)}
 
 
 def by_author(notes=None):

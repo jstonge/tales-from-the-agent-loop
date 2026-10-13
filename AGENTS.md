@@ -28,6 +28,13 @@ a section is assembled rather than argued, say so and let it be argued with.
 Sections under an `### <author name>` heading are that person's, always. Claude
 never writes there, and never flips `status:`.
 
+Atomic notes at the vault root go further: one idea, one author, the whole note
+theirs — so there's no heading, and `addedBy` says whose it is. Claude doesn't
+edit them at all. If one should be split, retitled or linked, say so in chat.
+Nor does it create notes at the root — structure notes included. Deciding which
+notes belong together, and in what order, is the thinking; when a cluster shows
+up in `tools/vault-index`, point it out and leave the gathering to them.
+
 ## Say where a fact came from
 
 The vault's own archives in `sources/` are checkable — anyone can open the file
@@ -51,7 +58,7 @@ section below the table rather than losing it to a cell.
 
 ## Where notes live
 
-- vault root — your own thinking, written rather than compiled
+- vault root — your own thinking as atomic notes, written rather than compiled
 - `synthesis/` — surveys compiled across the reading notes, made by `tools/synth`
 - `reading/` — one note per source, made by `tools/note`
 - `who/` — people and organisations: who they are and what they've made

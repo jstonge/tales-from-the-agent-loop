@@ -35,15 +35,17 @@ other.
 Once there are enough notes to compare, `/vault-synthesis` builds a survey
 across them — see [`current-harnesses`](synthesis/current-harnesses.md).
 
-When you have something to say that isn't about any one source, start a note at
-the root instead:
+When you have something to say that isn't about any one source, start an
+atomic note at the root instead — one idea per note, linked to the others and
+to the reading it rests on:
 
 ```sh
-tools/note --slug what-minimal-buys-you --template thinking
+tools/note --slug what-minimal-buys-you --template atomic-notes
 ```
 
-It fills in the date and your name and opens a section under your own heading.
-Nothing writes there but you.
+It fills in the date and your name. The whole note is yours; nothing else
+writes there. `tools/vault-index` shows which of your notes nothing links to,
+which link nowhere, and which cite no reading.
 
 Under the hood, the work splits in two: the skill is prose telling the agent
 what to do, and the tool does only what doesn't need judgment. Nothing in
@@ -75,7 +77,7 @@ Where things live:
 | `who/` | the people and organisations behind them |
 | `synthesis/` | surveys compiled across the reading notes |
 | `sources/` | archived full text, so nothing depends on a live URL |
-| the root | our own thinking, written rather than compiled |
+| the root | our own thinking, one atomic note per idea |
 
 If you work with something other than Claude Code, install the skills where your
 agent looks and tell it whose name to sign with:
@@ -88,18 +90,4 @@ export VAULT_AGENT=Codex
 
 The conventions are in [AGENTS.md](AGENTS.md), and the CLI underneath the skills
 is documented in [tools/README.md](tools/README.md).
-
-## Conceptually, what are we doing?
-
-Here's some ideas about what this means, based on the institutional needs of the university to become more functional, i.e. the "Horizon" project (previously call CODEC). 
-
-##  1. Academia needs funding sources to thrive 
-
-Let’s say we want a way to discover funding sources to support research at UVM. It used to be that money from the federal government was the largest source of funding, with private sources chipping in. But the world has changed. Private frontier labs are now probably more likely to get government funding, while public universities must adapt as best they can. How do we write a humanistic agent loop to empower R&D folks to become more effective at finding funding sources? 
-
-## 2. Pre-award management
-
-This is another kind of loop, where an individual or a group of people work together to get the money from a funding source (an opportunity).
-
-
 

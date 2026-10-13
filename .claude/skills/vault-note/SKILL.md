@@ -76,13 +76,13 @@ Reading notes live in `reading/`, one per source, and are what this skill makes.
 - `who` → `who/`, people and organisations
 - `synthesis` → `synthesis/`, surveys compiled across reading notes — that's
   the `vault-synthesis` skill's job, via `tools/synth`, not this one
-- `thinking` → the vault root, the user's own thinking across sources
+- `atomic-notes` → the vault root, the user's own thinking, one idea per note
 
-Thinking notes have no `sourceUrl`, no archive and no `kind`. Don't write them
+Atomic notes have no `sourceUrl`, no archive and no `kind`. Don't write them
 unprompted. They're the user's argument, not a summary, and the whole point of
 the split is that one is sourced and the other is thought. If asked to start
-one, scaffold it with `tools/note --slug <topic> --template thinking` and leave
-the thinking to them.
+one, scaffold it with `tools/note --slug <topic> --template atomic-notes` and
+leave the thinking to them.
 
 ## Choosing the slug
 
