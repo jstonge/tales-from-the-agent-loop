@@ -5,7 +5,7 @@ Articles are saved as readable markdown, YouTube links as a flattened
 transcript, both under sources/. Summary text is read from stdin, so it never
 has to survive shell quoting:
 
-    bin/note https://example.com/post --slug author-short-title \
+    tools/note https://example.com/post --slug author-short-title \
         --tags agent-from-scratch --set topic="agent design" <<'EOF'
     Two or three sentences.
     EOF

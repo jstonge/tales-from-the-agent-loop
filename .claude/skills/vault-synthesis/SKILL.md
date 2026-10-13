@@ -8,8 +8,8 @@ description: Build a synthesis note at the vault root that surveys what's in rea
 A reading note answers "what does this source say". A synthesis note answers
 "what's out there, and what is it". This builds the second from the first.
 
-`bin/synth` assembles the skeleton; you write the prose. That division is the
-same one `bin/note` uses, and for the same reason: the tool can group notes
+`tools/synth` assembles the skeleton; you write the prose. That division is the
+same one `tools/note` uses, and for the same reason: the tool can group notes
 deterministically, but only you can read them and say what a thing actually is.
 
 ## The loop
@@ -17,7 +17,7 @@ deterministically, but only you can read them and say what a thing actually is.
 **1. See what you have.**
 
 ```sh
-bin/vault-index
+tools/vault-index
 ```
 
 The `BY HARNESS` block is the shape of the answer. A harness covered by one
@@ -27,8 +27,8 @@ later rather than presenting both with equal confidence.
 **2. Scaffold.**
 
 ```sh
-bin/synth --slug current-harnesses --topic "harness landscape"
-bin/synth --slug minimal-vs-batteries --harness pi,deepagents,teensycode
+tools/synth --slug current-harnesses --topic "harness landscape"
+tools/synth --slug minimal-vs-batteries --harness pi,deepagents,teensycode
 ```
 
 With no `--harness` it takes every harness in the vault. Pass a subset when the
@@ -57,7 +57,7 @@ that doesn't mark its own edges reads as complete when it isn't.
 
 ## Attribution
 
-Everything `bin/synth` generates sits under a `> [!agent] <name> survey`
+Everything `tools/synth` generates sits under a `> [!agent] <name> survey`
 banner, and anything you add to those sections stays under one. See `AGENTS.md` — the rule
 across this vault is that no unlabelled prose is Claude's, because two people
 are writing here and an unattributed paragraph quietly becomes something "we
@@ -84,5 +84,5 @@ the user in chat. Don't put it under their name.
 Re-running with `--force` rebuilds the skeleton from the current notes, which
 drops the descriptions you wrote. Prefer editing the note in place when new
 reading notes land: add the `###` section for a new harness, append the new
-`[[wikilink]]` under an existing one. Check `bin/vault-index` against the note
+`[[wikilink]]` under an existing one. Check `tools/vault-index` against the note
 to see what's drifted.

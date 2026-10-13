@@ -1,11 +1,11 @@
-# `bin/note`
+# `tools/note`
 
 Renders a note from `my-templates/reading.md` into `reading/` and archives the source to
 `sources/` so the note survives link rot. It does no thinking of its own — ask
 Claude to read the page and call it, or use the `/vault-note` skill.
 
 ```sh
-bin/note https://example.com/post \
+tools/note https://example.com/post \
     --slug author-short-title \
     --kind post \
     --harness deepagents \
@@ -45,7 +45,7 @@ one. Obsidian's Templates plugin has an **Insert current date** command
 (`Settings → Hotkeys → "Insert current date"`) worth binding to a key.
 
 Each of you only edits your own lines, which keeps Obsidian Sync and git from
-producing conflict copies. `bin/note` seeds a heading for whoever creates the
+producing conflict copies. `tools/note` seeds a heading for whoever creates the
 note and never touches the section afterwards — a second author adds their own
 heading by hand.
 
@@ -70,7 +70,7 @@ no `sourceUrl`, no archive, no `kind`, just your thinking with links out to the
 reading notes it draws on. `--template` routes between them, so
 
 ```sh
-bin/note --slug harness-design-space --template synthesis
+tools/note --slug harness-design-space --template synthesis
 ```
 
 scaffolds one at the root with the date and your name already filled in.
@@ -78,7 +78,7 @@ scaffolds one at the root with the date and your name already filled in.
 and which notes here cover them:
 
 ```sh
-bin/note --slug "Hadley Wickham" --template who --set kind=person
+tools/note --slug "Hadley Wickham" --template who --set kind=person
 ```
 
 `sources/` holds the archived full text, kept out of all of them.
@@ -120,7 +120,7 @@ rebuilding it from the template: your frontmatter, your tags and anything you
 wrote under `## Why do I bring this up?` survive, and an existing
 `Claude summary:` block is replaced rather than duplicated.
 
-`bin/vault-index` prints the tag vocabulary,
+`tools/vault-index` prints the tag vocabulary,
 the grouping by harness, and a one-line gist per note.
 
 ## Working on this vault with an agent
@@ -139,7 +139,7 @@ npx skills add jstonge/tales-from-the-agent-loop --skill vault-synthesis --agent
 ```
 
 `--agent` takes `codex`, `cursor`, `opencode`, `github-copilot`, `gemini-cli`,
-`cline`, `windsurf` and many more. The skills call `bin/note` and friends by
+`cline`, `windsurf` and many more. The skills call `tools/note` and friends by
 relative path, so run the agent from the vault root.
 
 If you work with an agent other than Claude, set the name it signs its work

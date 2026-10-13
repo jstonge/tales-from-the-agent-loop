@@ -53,7 +53,7 @@ export VAULT_AGENT=Codex
 ```
 
 The conventions are in [AGENTS.md](AGENTS.md), and the CLI underneath the skills
-is documented in [bin/README.md](bin/README.md).
+is documented in [tools/README.md](tools/README.md).
 
 ## Conceptually, what are we doing?
 

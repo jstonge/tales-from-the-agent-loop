@@ -1,6 +1,6 @@
 ---
 name: vault-note
-description: Create or fill in a reading note in this Obsidian vault from a URL — archives the source to sources/, reads it, and writes an attributed summary via bin/note. Usually invoked directly as `/vault-note <url> [kind]`, where kind is one of post, course, video, paper, docs, repo, book. Also use it whenever the user drops a bare URL with little or no instruction, says they want to save/add/note an article, blog post, paper, course, GitHub repo, or YouTube video, asks to summarize something for the vault, or asks to fill in notes that are missing summaries. A bare URL in this vault almost always means "make a note for this."
+description: Create or fill in a reading note in this Obsidian vault from a URL — archives the source to sources/, reads it, and writes an attributed summary via tools/note. Usually invoked directly as `/vault-note <url> [kind]`, where kind is one of post, course, video, paper, docs, repo, book. Also use it whenever the user drops a bare URL with little or no instruction, says they want to save/add/note an article, blog post, paper, course, GitHub repo, or YouTube video, asks to summarize something for the vault, or asks to fill in notes that are missing summaries. A bare URL in this vault almost always means "make a note for this."
 ---
 
 # Vault note
@@ -9,7 +9,7 @@ Turn a URL into a finished note in this vault. The user hands you a link; you
 come back with a note whose frontmatter is filled, whose source is archived
 locally, and whose summary you actually wrote after reading the thing.
 
-`bin/note` does all the file writing. Your job is the part it can't do: read the
+`tools/note` does all the file writing. Your job is the part it can't do: read the
 source and say something true about it.
 
 ## Invocation
@@ -42,7 +42,7 @@ For a `book` there may be no URL at all; that's expected, see **Kind** below.
 **1. Archive and read before you write anything.**
 
 ```sh
-bin/note <url> --slug <slug> [--kind <kind>] [--tags a,b]
+tools/note <url> --slug <slug> [--kind <kind>] [--tags a,b]
 ```
 
 This writes `sources/<slug>.md` (the full article, or a flattened transcript for
@@ -53,7 +53,7 @@ judgment, and you can't exercise it on a page you skimmed.
 **2. Write the summary and run it back in.**
 
 ```sh
-bin/note <url> --slug <slug> --force --no-archive <<'EOF'
+tools/note <url> --slug <slug> --force --no-archive <<'EOF'
 Your summary.
 EOF
 ```
@@ -72,14 +72,14 @@ shell escaping. Use a quoted heredoc (`<<'EOF'`) so backticks and `$` stay liter
 Reading notes live in `reading/`, one per source, and are what this skill makes.
 The vault root is for the user's own synthesis notes — their thinking across
 several sources, made from `my-templates/synthesis.md`. Those have no
-`sourceUrl`, no archive and no `kind`, and `bin/note` routes on the template:
+`sourceUrl`, no archive and no `kind`, and `tools/note` routes on the template:
 `--template reading` (the default) writes to `reading/`, anything else writes to
 the root.
 
 Don't write synthesis notes unprompted. They're the user's argument, not a
 summary, and the whole point of the split is that one is sourced and the other
 is thought. If asked to start one, scaffold it with
-`bin/note --slug <topic> --template synthesis` and leave the thinking to them.
+`tools/note --slug <topic> --template synthesis` and leave the thinking to them.
 
 ## Choosing the slug
 
@@ -113,7 +113,7 @@ Avoid marketing verbs: no "dives into", "explores", "unpacks", "delves".
 the tags already in use, and a one-line gist of every note:
 
 ```sh
-bin/vault-index
+tools/vault-index
 ```
 
 Run it once, before writing. Reuse a tag that already exists rather than coining
@@ -139,7 +139,7 @@ that the reader can tell at a glance which thoughts are whose.
 
 That section is split further by an `### <author name>` heading per person, so
 two collaborators can write in one note without editing the same lines (which is
-what produces sync conflicts). `bin/note` seeds a heading for whoever creates the
+what produces sync conflicts). `tools/note` seeds a heading for whoever creates the
 note and never touches the section again. Each contribution under a heading is
 stamped with the date it was written, so a take can evolve without rewriting
 what was thought earlier:
@@ -158,7 +158,7 @@ someone else's. Use the date they wrote it, not the note's creation date. The sa
 ## By
 
 `--by "<name>"` records who made the source, as a wikilink into `who/`.
-Comma-separated when there's more than one. Check `bin/vault-index` for the
+Comma-separated when there's more than one. Check `tools/vault-index` for the
 existing spelling before adding a name — `LangChain` and `langchain` would split
 the same author in two.
 
@@ -200,7 +200,7 @@ and `.pdf` → `paper`, `/academy/` and `/course/` → `course`, `docs.*` and
 `/reference/` → `docs`, GitHub/GitLab/Codeberg hosts → `repo`, otherwise `post`.
 Host-anchoring keeps `docs.github.com` as `docs` rather than `repo`. Pass
 `--kind` when the URL lies — a course hosted at a plain blog path, say. `book` has no URL signature and the URL
-argument is optional, so a book is `bin/note --kind book --slug ...` with no link.
+argument is optional, so a book is `tools/note --kind book --slug ...` with no link.
 
 ## Known rough edges
 

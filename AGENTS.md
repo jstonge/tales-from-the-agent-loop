@@ -6,7 +6,7 @@ Anything an agent produces in this vault sits in an `[!agent]` callout, so a
 reader can tell at a glance whose words they're reading — orange, with a bot
 icon, styled by `.obsidian/snippets/agent-callout.css`. The title names the
 agent that actually wrote it: `> [!agent] Claude summary` on a reading note,
-`> [!agent] Claude survey` as a banner on a generated section. `bin/note` takes
+`> [!agent] Claude survey` as a banner on a generated section. `tools/note` takes
 the name from `$VAULT_AGENT`, defaulting to `Claude`, so set it once if you work
 with something else:
 
@@ -52,10 +52,10 @@ section below the table rather than losing it to a cell.
 ## Where notes live
 
 - vault root — your own synthesis notes, written across sources
-- `reading/` — one note per source, made by `bin/note`
+- `reading/` — one note per source, made by `tools/note`
 - `who/` — people and organisations: who they are and what they've made
 - `sources/` — archived full text of what was read; nobody's words but the author's
 
-`bin/note` routes on `--template`, so a new shape is a template file plus an
+`tools/note` routes on `--template`, so a new shape is a template file plus an
 entry in `FOLDERS`. Entity notes get no `### <author>` heading — they're shared
 reference, not anyone's take.
