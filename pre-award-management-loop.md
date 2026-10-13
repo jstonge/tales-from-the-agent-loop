@@ -1,8 +1,8 @@
 ---
 topic:
 harness:
-date: "2026-10-13"
-addedBy:
+date: 2026-10-13
+addedBy: Jonathan St-Onge
 tags:
 ---
 # pre-award-management-loop
