@@ -1,10 +1,9 @@
 /* A callout type for anything Claude wrote, so generated prose is visibly
    distinct from what a human argued. See CLAUDE.md.
 
-   Two tones, because one orange can't read well on both white and near-black:
-   a deeper one for light mode so the title holds contrast, a lighter one for
-   dark mode so it doesn't glow. Swap the triplets below to taste —
-   Obsidian reloads snippets on save, no restart needed.
+   Colours are set explicitly rather than only through --callout-color,
+   because how a theme consumes that variable varies. To retune, change the
+   two rgb() values per block. Obsidian reloads snippets on save.
 
      amber   245, 158, 11   warmer, more yellow
      orange  249, 115, 22   vivid, middle of the road
@@ -12,17 +11,34 @@
 */
 
 .callout[data-callout="claude"] {
-    --callout-color: 234, 88, 12;   /* orange-600 */
-    --callout-icon: lucide-bot;
+    --callout-color: 234, 88, 12;
+    --callout-icon: lucide-zap;
+    background-color: rgba(234, 88, 12, 0.08);
+    border: 1px solid rgba(234, 88, 12, 0.35);
+    border-left: 4px solid rgb(234, 88, 12);
+    mix-blend-mode: normal;
+}
+
+.callout[data-callout="claude"] .callout-title,
+.callout[data-callout="claude"] .callout-title-inner {
+    color: rgb(194, 65, 12);
+}
+
+.callout[data-callout="claude"] .callout-icon,
+.callout[data-callout="claude"] .callout-icon svg {
+    color: rgb(194, 65, 12);
 }
 
 .theme-dark .callout[data-callout="claude"] {
-    --callout-color: 251, 146, 60;  /* orange-400 */
+    --callout-color: 251, 146, 60;
+    background-color: rgba(251, 146, 60, 0.10);
+    border-color: rgba(251, 146, 60, 0.35);
+    border-left-color: rgb(251, 146, 60);
 }
 
-/* Read as a byline, not a heading — the content is the point, the
-   attribution is a label on it. */
-.callout[data-callout="claude"] > .callout-title {
-    font-size: var(--font-smaller);
-    letter-spacing: 0.02em;
+.theme-dark .callout[data-callout="claude"] .callout-title,
+.theme-dark .callout[data-callout="claude"] .callout-title-inner,
+.theme-dark .callout[data-callout="claude"] .callout-icon,
+.theme-dark .callout[data-callout="claude"] .callout-icon svg {
+    color: rgb(251, 146, 60);
 }

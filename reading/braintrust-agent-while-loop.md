@@ -9,6 +9,8 @@ sourceUrl: https://www.braintrust.dev/blog/agent-while-loop
 recBy:
 tags:
   - agent-patterns
+  - agent-evals
+  - context-engineering
 localCopy: "[[sources/braintrust-agent-while-loop|archived copy]]"
 ---
 

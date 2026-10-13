@@ -33,16 +33,14 @@ tags:
 ## What this doesn't cover
 
 > [!claude] Claude survey
-> Gaps in the survey above, not in the field.
-
-Absent entirely, with no reading note yet: Cursor, Codex, Aider, Amp, Gemini CLI,
+> Absent entirely, with no reading note yet: Cursor, Codex, Aider, Amp, Gemini CLI,
 and Anthropic's own Claude Agent SDK — which matters, since two of the notes here
 reference LangChain's published comparison against it.
-
-Thin where present: `claude-code` is only described by its competitors, and
+> Thin where present: `claude-code` is only described by its competitors, and
 `deepseek-harness` and `opencode` are storefront READMEs whose actual design
 lives in docs sites nobody has archived. Treat those three as placeholders
 rather than assessments.
+
 
 ## Thinking
 
