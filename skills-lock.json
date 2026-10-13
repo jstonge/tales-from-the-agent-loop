@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "vault-note": {
+      "source": "jstonge/tales-from-the-agent-loop",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/vault-note/SKILL.md",
+      "computedHash": "7f61d1ee76d3f05ec600151f2987b1e672cf75e8a00ef2f46d6575260d65366c"
+    },
+    "vault-synthesis": {
+      "source": "jstonge/tales-from-the-agent-loop",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/vault-synthesis/SKILL.md",
+      "computedHash": "d4f6457a1193fe2a67ea6a923d754f4c2183d624da74a780eb2e5b6f1261d687"
+    }
+  }
+}
