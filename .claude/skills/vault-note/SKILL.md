@@ -67,6 +67,20 @@ they wrote under `## Why do I bring this up?` survive, and an existing
 Summary text goes in on stdin so apostrophes and quotes don't have to survive
 shell escaping. Use a quoted heredoc (`<<'EOF'`) so backticks and `$` stay literal.
 
+## Two kinds of note
+
+Reading notes live in `reading/`, one per source, and are what this skill makes.
+The vault root is for the user's own synthesis notes — their thinking across
+several sources, made from `my-templates/synthesis.md`. Those have no
+`sourceUrl`, no archive and no `kind`, and `bin/note` routes on the template:
+`--template reading` (the default) writes to `reading/`, anything else writes to
+the root.
+
+Don't write synthesis notes unprompted. They're the user's argument, not a
+summary, and the whole point of the split is that one is sourced and the other
+is thought. If asked to start one, scaffold it with
+`bin/note --slug <topic> --template synthesis` and leave the thinking to them.
+
 ## Choosing the slug
 
 Shape it `<author-or-source>-<short-title>`, kebab-case, no date — matching

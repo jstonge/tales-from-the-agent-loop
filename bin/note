@@ -121,8 +121,8 @@ def main():
     ap.add_argument("--slug", required=True, help="filename and H1, no .md")
     ap.add_argument("--kind", choices=[k for k, _ in KINDS] + ["post", "book"],
                     help="default: inferred from the URL")
-    ap.add_argument("--template", default="note",
-                    help="template in my-templates/, without .md (default: note)")
+    ap.add_argument("--template", default="reading",
+                    help="template in my-templates/, without .md (default: reading)")
     ap.add_argument("--tags", default="", help="comma-separated, appended and deduped")
     ap.add_argument("--added-by", default="",
                     help="who's adding the note (default: git user.name, else whoami)")
@@ -134,9 +134,12 @@ def main():
     ap.add_argument("--force", action="store_true", help="overwrite an existing note")
     args = ap.parse_args()
 
+    # a reading note is about a source and lives in reading/; anything else is
+    # the user's own writing and belongs at the vault root
+    is_reading = args.template == "reading"
     kind = args.kind or infer_kind(args.url)
     tpl = VAULT / "my-templates" / f"{args.template}.md"
-    dest = VAULT / f"{args.slug}.md"
+    dest = VAULT / ("reading" if is_reading else "") / f"{args.slug}.md"
     copy = VAULT / "sources" / f"{args.slug}.md"
     if not tpl.exists():
         sys.exit(f"no template at {tpl}")
@@ -150,8 +153,9 @@ def main():
     body = body.replace("{{title}}", args.slug).replace('"{{date}}"', TODAY)
     body = body.replace("{{date}}", TODAY)
 
-    if args.url and not args.no_archive and (text := fetch(args.url)):
+    if is_reading and args.url and not args.no_archive and (text := fetch(args.url)):
         copy.parent.mkdir(exist_ok=True)
+        dest.parent.mkdir(exist_ok=True)
         origin = ("youtube auto-captions, expect transcription errors"
                   if IS_VIDEO.search(args.url) else "article text")
         copy.write_text(
@@ -160,7 +164,8 @@ def main():
         print(copy)
 
     fields = dict(p.split("=", 1) for p in args.set)
-    fields["kind"] = kind
+    if is_reading:
+        fields["kind"] = kind
     # don't reattribute a note someone else already added
     author = args.added_by or identity()
     if args.added_by or not re.search(r"(?m)^addedBy: *\S", body):
@@ -194,9 +199,10 @@ def main():
     # a heading per author, so two people can write without editing the same
     # lines; only seeded on creation, never touched on a re-run
     if is_new:
-        body = re.sub(r"(?m)^(## Why do I bring this up\?\n)",
+        body = re.sub(r"(?m)^(## [^\n]*\n)",
                       lambda m: f"{m[1]}\n### {author}\n", body, count=1)
 
+    dest.parent.mkdir(exist_ok=True)
     dest.write_text(body, encoding="utf-8")
     print(dest)
 

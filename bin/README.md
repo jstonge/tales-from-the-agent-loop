@@ -1,6 +1,6 @@
 # `bin/note`
 
-Renders a note from `my-templates/note.md` and archives the source to
+Renders a note from `my-templates/reading.md` into `reading/` and archives the source to
 `sources/` so the note survives link rot. It does no thinking of its own — ask
 Claude to read the page and call it, or use the `/vault-note` skill.
 
@@ -57,9 +57,23 @@ heading by hand.
 | `--tags a,b` | appended to the template's tags, deduped |
 | `--added-by NAME` | who's adding the note; defaults to `git config user.name` |
 | `--set KEY=VALUE` | set any frontmatter key, repeatable; adds the key if missing |
-| `--template NAME` | a template in `my-templates/`, without `.md` (default: `note`) |
+| `--template NAME` | a template in `my-templates/`, without `.md` (default: `reading`) |
 | `--no-archive` | skip the `sources/` copy |
 | `--force` | overwrite an existing note |
+
+## Layout
+
+`reading/` holds one note per source — what this tool makes. The vault root
+holds your own synthesis notes, written from `my-templates/synthesis.md`:
+no `sourceUrl`, no archive, no `kind`, just your thinking with links out to the
+reading notes it draws on. `--template` routes between them, so
+
+```sh
+bin/note --slug harness-design-space --template synthesis
+```
+
+scaffolds one at the root with the date and your name already filled in.
+`sources/` holds the archived full text, kept out of both.
 
 ## Fields
 

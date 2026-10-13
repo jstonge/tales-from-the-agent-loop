@@ -9,7 +9,7 @@ import re
 import sys
 from pathlib import Path
 
-VAULT = Path(__file__).resolve().parents[4]
+VAULT = Path(__file__).resolve().parents[4]  # vault root
 
 
 def gist(body):
@@ -29,9 +29,8 @@ def gist(body):
 
 def main():
     notes, tags = [], set()
-    for f in sorted(VAULT.glob("*.md")):
-        if f.name == "README.md":
-            continue
+    synthesis = [f.stem for f in sorted(VAULT.glob("*.md")) if f.name != "README.md"]
+    for f in sorted((VAULT / "reading").glob("*.md")):
         body = f.read_text(encoding="utf-8")
         fm = body.split("---", 2)[1] if body.startswith("---") else ""
         tb = re.search(r"(?m)^tags:((?:\n  - .*)+)", fm)
@@ -42,10 +41,14 @@ def main():
         harness = ",".join(re.findall(r"- (.+)", hb[1])) if hb else ""
         notes.append((f.stem, kind, harness, gist(body)))
 
-    if not notes:
+    if not notes and not synthesis:
         print("vault is empty")
         return
     print("TAGS IN USE:", ", ".join(sorted(tags)) or "(none)")
+    if synthesis:
+        print("\nYOUR NOTES (vault root):")
+        for name in synthesis:
+            print(f"  {name}")
 
     seen = {}
     for slug, kind, harness, _ in notes:
@@ -56,7 +59,7 @@ def main():
         for h, kinds in sorted(seen.items()):
             print(f"  {h:<14} {', '.join(sorted(kinds))}")
 
-    print(f"\n{len(notes)} NOTES:")
+    print(f"\n{len(notes)} READING NOTES:")
     width = max(len(n[0]) for n in notes)
     for slug, kind, harness, text in notes:
         label = f"[{kind}]" + (f"[{harness}]" if harness else "")
