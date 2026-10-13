@@ -35,6 +35,27 @@ other.
 Once there are enough notes to compare, `/vault-synthesis` builds a survey
 across them — see [`current-harnesses`](current-harnesses.md).
 
+Under the hood, the work splits in two: the skill is prose telling the agent
+what to do, and the tool does only what doesn't need judgment. Nothing in
+`tools/` calls a model — if it had to think, your notes would depend on it
+thinking the same way twice.
+
+```mermaid
+flowchart TD
+    you["you<br/>a URL"] --> skill["skill<br/>what to do, in prose"]
+    skill --> agent["agent<br/>reads the source,<br/>writes the summary"]
+    agent --> note["tools/note<br/>renders, archives"]
+    tpl["my-templates/"] --> note
+    note --> reading["reading/<br/>one note per source"]
+    note --> sources["sources/<br/>archived full text"]
+    reading --> synth["tools/synth<br/>survey across notes"]
+    synth --> root["your own notes<br/>at the vault root"]
+```
+
+`my-templates/` has two consumers, not one: Obsidian's Templates plugin points
+at the same folder, so adding a field to `reading.md` changes both what the tool
+emits and what you get pressing Cmd+T, with no code change.
+
 Where things live:
 
 | | |
