@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+"""Print what's already in the vault: the tag vocabulary, the harnesses covered,
+and one line per note. Enough to pick existing tags and spot notes worth linking
+without reading every file."""
+
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import vaultlib as vault  # noqa: E402
+
+
+def main():
+    notes = vault.reading_notes()
+    synthesis = [f.stem for f in sorted(vault.VAULT.glob("*.md")) if f.name != "README.md"]
+    if not notes and not synthesis:
+        print("vault is empty")
+        return
+
+    tags = sorted({t for _, f, _ in notes for t in vault.listed(f, "tags")})
+    print("TAGS IN USE:", ", ".join(tags) or "(none)")
+
+    if synthesis:
+        print("\nYOUR NOTES (vault root):")
+        for name in synthesis:
+            print(f"  {name}")
+
+    if groups := vault.by_harness(notes):
+        print("\nBY HARNESS:")
+        width = max(len(h) for h in groups)
+        for harness, ns in groups.items():
+            kinds = ", ".join(sorted({(f.get("kind") or "?") for _, f, _ in ns}))
+            print(f"  {harness:<{width}}  {kinds}")
+
+    print(f"\n{len(notes)} READING NOTES:")
+    width = max(len(n[0]) for n in notes)
+    for slug, fields, gist in notes:
+        label = f"[{fields.get('kind') or '?'}]"
+        if hs := vault.listed(fields, "harness"):
+            label += f"[{','.join(hs)}]"
+        print(f"  {slug:<{width}}  {label:<24} {gist}")
+
+
+if __name__ == "__main__":
+    main()

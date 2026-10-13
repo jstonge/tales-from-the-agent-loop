@@ -113,7 +113,7 @@ Avoid marketing verbs: no "dives into", "explores", "unpacks", "delves".
 the tags already in use, and a one-line gist of every note:
 
 ```sh
-python3 .claude/skills/vault-note/scripts/vault-index.py
+bin/vault-index
 ```
 
 Run it once, before writing. Reuse a tag that already exists rather than coining

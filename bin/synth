@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+"""Bootstrap a synthesis note from what's already in reading/.
+
+Gathers the reading notes for each harness and lays them out as sections, so
+the note starts with the material on it. It writes no prose of its own — the
+description of what each harness does is yours (or Claude's) to add.
+
+    bin/synth --slug current-harnesses
+    bin/synth --slug minimal-vs-batteries --harness pi,deepagents,teensycode
+"""
+
+import argparse
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import vaultlib as vault  # noqa: E402
+
+BIN = Path(__file__).resolve().parent
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--slug", required=True, help="filename and H1, no .md")
+    ap.add_argument("--harness", default="", help="comma-separated; default: all of them")
+    ap.add_argument("--topic", default="", help="the topic: field")
+    ap.add_argument("--force", action="store_true")
+    args = ap.parse_args()
+
+    groups = vault.by_harness()
+    if args.harness:
+        want = [h.strip() for h in args.harness.split(",") if h.strip()]
+        missing = [h for h in want if h not in groups]
+        if missing:
+            sys.exit(f"no reading notes for: {', '.join(missing)}\n"
+                     f"known: {', '.join(groups)}")
+        groups = {h: groups[h] for h in want}
+    if not groups:
+        sys.exit("no reading notes carry a harness: field yet")
+
+    cmd = [str(BIN / "note"), "--slug", args.slug, "--template", "synthesis",
+           "--harness", ",".join(groups)]
+    if args.topic:
+        cmd += ["--set", f"topic={args.topic}"]
+    if args.force:
+        cmd.append("--force")
+    res = subprocess.run(cmd, capture_output=True, text=True, stdin=subprocess.DEVNULL)
+    if res.returncode != 0:
+        sys.exit(res.stderr.strip() or "bin/note failed")
+    dest = Path(res.stdout.strip().split("\n")[-1])
+
+    block = ["## Harnesses\n"]
+    for harness, notes in groups.items():
+        kinds = ", ".join(sorted({(f.get("kind") or "?") for _, f, _ in notes}))
+        block.append(f"### {harness}\n")
+        block.append(f"<!-- what it does -->\n")
+        for slug, _, gist in notes:
+            block.append(f"- [[{slug}]] — {gist}")
+        block.append(f"\n_Covered by {len(notes)} note(s): {kinds}._\n")
+
+    body = dest.read_text(encoding="utf-8")
+    body = re.sub(r"(?m)^## Sources\n*", "", body).rstrip() + "\n"
+    body = re.sub(r"(?m)^(## Thinking\n)", "\n".join(block) + r"\n\1", body, count=1)
+    dest.write_text(body, encoding="utf-8")
+    print(dest)
+
+
+if __name__ == "__main__":
+    main()

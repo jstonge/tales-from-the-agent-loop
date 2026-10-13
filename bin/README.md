@@ -109,5 +109,5 @@ rebuilding it from the template: your frontmatter, your tags and anything you
 wrote under `## Why do I bring this up?` survive, and an existing
 `Claude summary:` block is replaced rather than duplicated.
 
-`.claude/skills/vault-note/scripts/vault-index.py` prints the tag vocabulary,
+`bin/vault-index` prints the tag vocabulary,
 the grouping by harness, and a one-line gist per note.
