@@ -7,5 +7,4 @@ tags:
 ---
 # How to work with agents for pre-award management
 
-This is another kind of loop, where an individual or a group of people work together to get the money from a funding source (an opportunity).
-
+Once you decided that a grant is relevant (aka [[Funding opportunities discovery in the age of agentic workflow|grant discovery loop]]), we have agents working together as a loop to get the best shot at getting the grant.
