@@ -1,6 +1,28 @@
 /* A callout type for anything Claude wrote, so generated prose is visibly
-   distinct from what a human argued. See CLAUDE.md. */
+   distinct from what a human argued. See CLAUDE.md.
+
+   Two tones, because one orange can't read well on both white and near-black:
+   a deeper one for light mode so the title holds contrast, a lighter one for
+   dark mode so it doesn't glow. Swap the triplets below to taste —
+   Obsidian reloads snippets on save, no restart needed.
+
+     amber   245, 158, 11   warmer, more yellow
+     orange  249, 115, 22   vivid, middle of the road
+     carrot  230, 126, 34   earthier, closer to brown
+*/
+
 .callout[data-callout="claude"] {
-    --callout-color: 230, 126, 34;
+    --callout-color: 234, 88, 12;   /* orange-600 */
     --callout-icon: lucide-bot;
+}
+
+.theme-dark .callout[data-callout="claude"] {
+    --callout-color: 251, 146, 60;  /* orange-400 */
+}
+
+/* Read as a byline, not a heading — the content is the point, the
+   attribution is a label on it. */
+.callout[data-callout="claude"] > .callout-title {
+    font-size: var(--font-smaller);
+    letter-spacing: 0.02em;
 }
