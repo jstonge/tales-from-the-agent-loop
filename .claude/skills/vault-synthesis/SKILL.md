@@ -55,6 +55,19 @@ paragraph, that's a reading note or its own synthesis note.
 have no reading note for, and harnesses whose coverage is thin. A landscape
 that doesn't mark its own edges reads as complete when it isn't.
 
+## Attribution
+
+Everything `bin/synth` generates sits under a `Claude survey:` label, and
+anything you add to those sections stays under it. See `CLAUDE.md` — the rule
+across this vault is that no unlabelled prose is Claude's, because two people
+are writing here and an unattributed paragraph quietly becomes something "we
+think".
+
+The survey defaults to a table, which is right for scanning and comparing. Watch
+what the cells squeeze out: when a claim rests on specific evidence — a
+benchmark number, a named mechanism — keep a prose section below the table
+rather than losing it.
+
 ## What stays yours
 
 `## Thinking` is the user's, under their `### <name>` heading with dated

@@ -52,14 +52,14 @@ def main():
         sys.exit(res.stderr.strip() or "bin/note failed")
     dest = Path(res.stdout.strip().split("\n")[-1])
 
-    block = ["## Harnesses\n"]
+    # labelled, because an unmarked survey reads as the user's own conclusion
+    block = ["## Harnesses\n", "Claude survey:\n",
+             "| Harness | What it is | The distinctive move | Covered by |",
+             "| --- | --- | --- | --- |"]
     for harness, notes in groups.items():
-        kinds = ", ".join(sorted({(f.get("kind") or "?") for _, f, _ in notes}))
-        block.append(f"### {harness}\n")
-        block.append(f"<!-- what it does -->\n")
-        for slug, _, gist in notes:
-            block.append(f"- [[{slug}]] — {gist}")
-        block.append(f"\n_Covered by {len(notes)} note(s): {kinds}._\n")
+        links = " · ".join(f"[[{slug}\\|{f.get('kind') or '?'}]]" for slug, f, _ in notes)
+        block.append(f"| **{harness}** |  |  | {links} |")
+    block.append("")
 
     body = dest.read_text(encoding="utf-8")
     body = re.sub(r"(?m)^## Sources\n*", "", body).rstrip() + "\n"

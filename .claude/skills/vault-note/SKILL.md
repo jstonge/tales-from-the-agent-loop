@@ -125,6 +125,12 @@ Read a neighbouring note in full only when the index line leaves you genuinely
 unsure whether there's a link worth making — the gist is usually enough, and
 reading every file gets slower every time the vault grows.
 
+## Attribution
+
+The `Claude summary:` label and its blockquote are not decoration. See
+`CLAUDE.md`: no unlabelled prose in this vault is Claude's. If you add anything
+to a note beyond the summary, label it the same way.
+
 ## Leave the user's side of the note alone
 
 `## Why do I bring this up?` is theirs. Never write in it, even when you have an
