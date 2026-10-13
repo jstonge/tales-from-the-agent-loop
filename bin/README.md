@@ -73,7 +73,14 @@ bin/note --slug harness-design-space --template synthesis
 ```
 
 scaffolds one at the root with the date and your name already filled in.
-`sources/` holds the archived full text, kept out of both.
+`entity/` holds people and organisations — who they are, what they've made,
+and which notes here cover them:
+
+```sh
+bin/note --slug "Hadley Wickham" --template entity --set kind=person
+```
+
+`sources/` holds the archived full text, kept out of all of them.
 
 ## Fields
 

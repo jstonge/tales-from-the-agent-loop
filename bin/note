@@ -25,6 +25,10 @@ from vaultlib import identity  # noqa: E402
 VAULT = Path(__file__).resolve().parent.parent
 TODAY = date.today().isoformat()
 IS_VIDEO = re.compile(r"youtube\.com|youtu\.be")
+FOLDERS = {"reading": "reading", "entity": "entity"}
+# templates whose body is someone's take, and so gets a heading per author.
+# An entity note is shared reference — nobody owns a paragraph of it.
+AUTHORED = {"reading", "synthesis"}
 
 # Source kinds, matched in order; anything unrecognised is a plain blog post.
 # "book" has no URL signature, so it has to be passed explicitly.
@@ -127,12 +131,12 @@ def main():
     ap.add_argument("--force", action="store_true", help="overwrite an existing note")
     args = ap.parse_args()
 
-    # a reading note is about a source and lives in reading/; anything else is
-    # the user's own writing and belongs at the vault root
+    # the template decides where the note lands; anything unlisted is the
+    # user's own writing and belongs at the vault root
     is_reading = args.template == "reading"
     kind = args.kind or infer_kind(args.url)
     tpl = VAULT / "my-templates" / f"{args.template}.md"
-    dest = VAULT / ("reading" if is_reading else "") / f"{args.slug}.md"
+    dest = VAULT / FOLDERS.get(args.template, "") / f"{args.slug}.md"
     copy = VAULT / "sources" / f"{args.slug}.md"
     if not tpl.exists():
         sys.exit(f"no template at {tpl}")
@@ -194,7 +198,7 @@ def main():
 
     # a heading per author, so two people can write without editing the same
     # lines; only seeded on creation, never touched on a re-run
-    if is_new:
+    if is_new and args.template in AUTHORED:
         body = re.sub(r"(?m)^(## [^\n]*\n)",
                       lambda m: f"{m[1]}\n### {author}\n", body, count=1)
 

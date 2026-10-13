@@ -21,4 +21,4 @@ localCopy: "[[sources/wickham-what-is-an-agent|archived copy]]"
 
 ### Jonathan St-Onge
 
-**2026-10-13** — Hadley being Hadley, he explains in plain words what tech bros explain in jargon. This is the first blog post in a series on building agents from scratch. I also like that it goes a long way toward showing that an agent can even be coded in `R`, which sometimes makes the whole thing feel more humble.
+**2026-10-13** — [[Hadley Wickham|Hadley]] being Hadley, he explains in plain words what tech bros explain in jargon. This is the first blog post in a series on building agents from scratch. I also like that it goes a long way toward showing that an agent can even be coded in `R`, which sometimes makes the whole thing feel more humble.

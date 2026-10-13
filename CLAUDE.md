@@ -29,3 +29,14 @@ columns in the note so they can be challenged.
 Tables compress, and the evidence is usually what gets squeezed out. When a
 claim is load-bearing — a benchmark number, a specific mechanism — keep a prose
 section below the table rather than losing it to a cell.
+
+## Where notes live
+
+- vault root — your own synthesis notes, written across sources
+- `reading/` — one note per source, made by `bin/note`
+- `entity/` — people and organisations: who they are and what they've made
+- `sources/` — archived full text of what was read; nobody's words but the author's
+
+`bin/note` routes on `--template`, so a new shape is a template file plus an
+entry in `FOLDERS`. Entity notes get no `### <author>` heading — they're shared
+reference, not anyone's take.
