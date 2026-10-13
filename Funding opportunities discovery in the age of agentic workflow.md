@@ -86,6 +86,31 @@ We could maybe add
 - `log_decision(faculty_id, opportunity_id, decision, reason)` to accumulate edges in the R&D knowledge graph
 - `score_fit(faculty, opportunity)` using something like tabFPN once we have labels
 
+> [!agent] Claude: filters for `search_opportunities` and `list_opportunities`
+> Proposed, not decided. Filters are for hard constraints checkable against structured fields; research topic goes in the `query`, since subject taxonomies differ between sponsors and would drop good matches.
+>
+> | Filter | Example | Notes |
+> |---|---|---|
+> | `deadline_after` / `deadline_before` | next 60 days | plus a `rolling` flag for no deadline |
+> | `status` | open | drop closed and archived by default |
+> | `sponsor` / `sponsor_type` | federal, foundation, industry, state | |
+> | `award_min` / `award_max`, `duration` | | fits scope |
+> | `opportunity_type` | research, fellowship, training, equipment, travel | separates a grant from a prize or travel award |
+> | `career_stage` | early-career, any | common eligibility cut |
+> | `institution_type` | R1, PUI, any | |
+> | `epscor_idea_eligible` | true | Vermont is an NSF EPSCoR / NIH IDeA state, so some programs are open to UVM for that reason (not re-checked) |
+> | `citizenship` / `residency` | | |
+> | `limited_submission` | false | only fillable if R&D writes the list down |
+> | `cost_share_required`, `indirect_cap` | | foundations often cap indirect costs |
+> | `team` | solo PI, multi-PI, partner required | |
+> | `posted_since` | last run date | makes recurring runs cheap |
+>
+> Two design points:
+> - **Unknown should not exclude.** If the pipeline could not parse a field, return the opportunity flagged `unknown` instead of dropping it, otherwise a strict filter hides grants silently.
+> - **Report what each filter removed.** Return a count excluded per filter, so an agent that gets zero results can tell which filter over-constrained.
+>
+> `eligible_for=faculty_id` could apply the profile-derived filters automatically, but it overlaps with `check_eligibility`. Probably keep that logic in one place and leave these filters about the opportunity itself. How many of these can be filled depends on the pipeline: with Pivot-RP out of reach, deadline, sponsor and award size are likely reliable from the open web, eligibility fields much less so.
+
 ## Next steps
 
 - [[How to work with agents for pre-award management]]
