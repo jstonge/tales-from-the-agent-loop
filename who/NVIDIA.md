@@ -12,7 +12,7 @@ tags:
 
 ## Who
 
-> [!claude] Claude summary
+> [!agent] Claude summary
 > GPU maker, here as an agent researcher rather than a hardware vendor. Their AVO
 > work is the strongest claim in the vault that long-horizon capability lives in
 > the harness rather than the model — though the GPU-kernel benchmark it rests on

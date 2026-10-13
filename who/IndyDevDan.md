@@ -11,7 +11,7 @@ tags:
 
 ## Who
 
-> [!claude] Claude summary
+> [!agent] Claude summary
 > YouTube channel about agentic coding, and the vault's main source of
 > competitor framing — the Pi video is his. Worth reading as advocacy rather than
 > assessment: the pitch is explicitly that you should use tools other people

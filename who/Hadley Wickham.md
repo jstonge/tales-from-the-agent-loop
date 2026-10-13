@@ -12,7 +12,7 @@ tags:
 
 ## Who
 
-> [!claude] Claude summary
+> [!agent] Claude summary
 > Statistician and software engineer, Chief Scientist at Posit (formerly RStudio).
 > Best known for the tidyverse — ggplot2, dplyr, tidyr — and for a house style of
 > explaining technical ideas in plain language, which is why his agent writing

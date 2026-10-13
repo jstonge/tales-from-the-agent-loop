@@ -12,7 +12,7 @@ tags:
 
 ## Who
 
-> [!claude] Claude summary
+> [!agent] Claude summary
 > Frontend cloud platform, best known for Next.js. Relevant here for Vercel
 > Academy, whose eleven-module course builds the TeensyCode harness from scratch.
 > The course stack is Vercel's own throughout — AI Gateway, Vercel Sandbox,

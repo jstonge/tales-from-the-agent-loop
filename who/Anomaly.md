@@ -12,7 +12,7 @@ tags:
 
 ## Who
 
-> [!claude] Claude summary
+> [!agent] Claude summary
 > Anomaly Innovations — a developer-tools company whose better-known project is
 > SST (Serverless Stack), with OpenCode the newer one. The house line is open,
 > composable infrastructure over black-box abstractions, which is visible in

@@ -12,7 +12,7 @@ tags:
 
 ## Who
 
-> [!claude] Claude summary
+> [!agent] Claude summary
 > The company behind LangChain, LangGraph and LangSmith, and now `deepagents` —
 > the batteries-included harness that sits at the opposite pole from Pi in this
 > vault. They also ship Deep Agents Code, a terminal coding agent built on it,

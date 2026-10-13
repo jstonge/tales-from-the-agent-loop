@@ -8,6 +8,15 @@ The Loop in Stålenhag’s work is a place, with some frontier technology that p
 
 In this project, we learn about that emerging Agent Loop from a humanistic perspective. How can we share the Loop with the Agent in ways that are empowering to us as humans? Maybe a day will come when we’ll need to ask whether we should make the LLM happy in that loop too... but we’re not there yet.
 
+## How to get started
+
+Clone this repo, open it as obsidian vault. Right now, there's 3 skills :
+```
+npx
+```
+
+## Conceptually, what are we doing?
+
 Here's some ideas about what this means, based on the institutional needs of the university to become more functional, i.e. the "Horizon" project (previously call CODEC). 
 
 ##  1. Academia needs funding sources to thrive 

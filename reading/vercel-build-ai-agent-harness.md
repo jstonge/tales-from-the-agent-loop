@@ -17,7 +17,7 @@ localCopy: "[[sources/vercel-build-ai-agent-harness|archived copy]]"
 
 # vercel-build-ai-agent-harness
 
-> [!claude] Claude summary
+> [!agent] Claude summary
 > A Vercel Academy course that builds a coding-agent harness called TeensyCode across eleven TypeScript modules. The organising idea is causal — each step exists because the previous one broke something: read because the chatbot can't see files, grep because it can't search, bash because it can't run commands, then safety gates because now it can `rm -rf`. Beyond the loop it covers context pruning, a sandbox abstraction with swappable local and in-memory backends, subagent delegation with per-job models, and an askUser human-in-the-loop protocol. Worth noting that the stack is Vercel's own throughout — AI Gateway for model routing, Vercel Sandbox, Vercel Workflow — so part of the architecture is product placement rather than necessity. The archived copy is the course index only; the module content sits behind separate pages.
 
 ## Why do I bring this up?

@@ -122,3 +122,29 @@ wrote under `## Why do I bring this up?` survive, and an existing
 
 `bin/vault-index` prints the tag vocabulary,
 the grouping by harness, and a one-line gist per note.
+
+## Working on this vault with an agent
+
+The conventions live in [`AGENTS.md`](../AGENTS.md), which Codex, Cursor,
+Copilot and others read directly; `CLAUDE.md` is a one-line pointer to it.
+
+Two skills wrap the tools below — `vault-note` turns a URL into a reading note,
+`vault-synthesis` builds a survey across them. Cloning the repo is enough for
+Claude Code, which loads `.claude/skills/` automatically. For any other agent,
+install them where that agent looks:
+
+```sh
+npx skills add jstonge/tales-from-the-agent-loop --skill vault-note --agent codex
+npx skills add jstonge/tales-from-the-agent-loop --skill vault-synthesis --agent codex
+```
+
+`--agent` takes `codex`, `cursor`, `opencode`, `github-copilot`, `gemini-cli`,
+`cline`, `windsurf` and many more. The skills call `bin/note` and friends by
+relative path, so run the agent from the vault root.
+
+If you work with an agent other than Claude, set the name it signs its work
+with, so the callouts don't credit the wrong one:
+
+```sh
+export VAULT_AGENT=Codex
+```

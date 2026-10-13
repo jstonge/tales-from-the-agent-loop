@@ -17,7 +17,7 @@ tags:
 
 ## Harnesses
 
-> [!claude] Claude survey
+> [!agent] Claude survey
 > Assembled from the reading notes linked below. Argue with it under Thinking rather than editing it into agreement.
 
 | Harness              | What it is                                                                | The distinctive move                                                                    | Covered by                                                                          |
@@ -32,7 +32,7 @@ tags:
 
 ## What this doesn't cover
 
-> [!claude] Claude survey
+> [!agent] Claude survey
 > Absent entirely, with no reading note yet: Cursor, Codex, Aider, Amp, Gemini CLI,
 and Anthropic's own Claude Agent SDK — which matters, since two of the notes here
 reference LangChain's published comparison against it.

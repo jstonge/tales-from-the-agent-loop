@@ -10,6 +10,7 @@ description of what each harness does is yours (or Claude's) to add.
 """
 
 import argparse
+import os
 import re
 import subprocess
 import sys
@@ -54,7 +55,7 @@ def main():
 
     # labelled, because an unmarked survey reads as the user's own conclusion
     block = ["## Harnesses\n",
-             "> [!claude] Claude survey",
+             f"> [!agent] {os.environ.get('VAULT_AGENT', 'Claude')} survey",
              "> Assembled from the reading notes linked below. Argue with it under"
              " Thinking rather than editing it into agreement.\n",
              "| Harness | What it is | The distinctive move | Covered by |",

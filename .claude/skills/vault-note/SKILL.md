@@ -127,8 +127,8 @@ reading every file gets slower every time the vault grows.
 
 ## Attribution
 
-The `> [!claude] Claude summary` callout is not decoration. See
-`CLAUDE.md`: no unlabelled prose in this vault is Claude's. If you add anything
+The `> [!agent] <name> summary` callout is not decoration. See
+`AGENTS.md`: no unlabelled prose in this vault is an agent's. If you add anything
 to a note beyond the summary, label it the same way.
 
 ## Leave the user's side of the note alone
@@ -168,7 +168,7 @@ leaving it silent.
 
 When you do write one, the archives usually carry only what a source reveals
 about its own author — often just a GitHub handle. A web search for background
-is appropriate here, but mark it: per `CLAUDE.md`, anything not from `sources/`
+is appropriate here, but mark it: per `AGENTS.md`, anything not from `sources/`
 says so with the date it was looked up, because star counts and funding rounds
 go stale in a way an archived article doesn't.
 

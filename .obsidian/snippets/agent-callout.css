@@ -1,4 +1,4 @@
-/* A callout type for anything Claude wrote, so generated prose is visibly
+/* A callout type for anything an agent wrote, so generated prose is visibly
    distinct from what a human argued. See CLAUDE.md.
 
    Colours are set explicitly rather than only through --callout-color,
@@ -11,7 +11,7 @@
      carrot  230, 126, 34   earthier, closer to brown
 */
 
-.callout[data-callout="claude"] {
+.callout[data-callout="agent"] {
     --callout-color: 234, 88, 12;
     --callout-icon: lucide-bot;
     background-color: rgba(234, 88, 12, 0.08);
@@ -20,26 +20,26 @@
     mix-blend-mode: normal;
 }
 
-.callout[data-callout="claude"] .callout-title,
-.callout[data-callout="claude"] .callout-title-inner {
+.callout[data-callout="agent"] .callout-title,
+.callout[data-callout="agent"] .callout-title-inner {
     color: rgb(194, 65, 12);
 }
 
-.callout[data-callout="claude"] .callout-icon,
-.callout[data-callout="claude"] .callout-icon svg {
+.callout[data-callout="agent"] .callout-icon,
+.callout[data-callout="agent"] .callout-icon svg {
     color: rgb(194, 65, 12);
 }
 
-.theme-dark .callout[data-callout="claude"] {
+.theme-dark .callout[data-callout="agent"] {
     --callout-color: 251, 146, 60;
     background-color: rgba(251, 146, 60, 0.10);
     border-color: rgba(251, 146, 60, 0.35);
     border-left-color: rgb(251, 146, 60);
 }
 
-.theme-dark .callout[data-callout="claude"] .callout-title,
-.theme-dark .callout[data-callout="claude"] .callout-title-inner,
-.theme-dark .callout[data-callout="claude"] .callout-icon,
-.theme-dark .callout[data-callout="claude"] .callout-icon svg {
+.theme-dark .callout[data-callout="agent"] .callout-title,
+.theme-dark .callout[data-callout="agent"] .callout-title-inner,
+.theme-dark .callout[data-callout="agent"] .callout-icon,
+.theme-dark .callout[data-callout="agent"] .callout-icon svg {
     color: rgb(251, 146, 60);
 }

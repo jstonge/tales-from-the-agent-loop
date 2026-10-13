@@ -12,7 +12,7 @@ tags:
 
 ## Who
 
-> [!claude] Claude summary
+> [!agent] Claude summary
 > Austrian software engineer, online as `badlogic`, and the author of Pi. Known
 > long before this for libGDX, the cross-platform Java game framework that became
 > the most used game framework on Android and shipped titles including Ingress and

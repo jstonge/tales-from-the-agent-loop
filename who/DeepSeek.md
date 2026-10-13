@@ -12,7 +12,7 @@ tags:
 
 ## Who
 
-> [!claude] Claude summary
+> [!agent] Claude summary
 > Chinese AI lab known for its open-weight models. Ships `dsh`, its own agent
 > harness, built on a composition framework called Cordis. The vault only covers
 > the repo README, which is a launcher rather than a design document, so what

@@ -11,7 +11,7 @@ tags:
 
 ## Who
 
-> [!claude] Claude summary
+> [!agent] Claude summary
 > Evaluation and observability tooling for LLM applications — logging traces,
 > comparing prompts and models, measuring output quality before and after release.
 > Founded August 2023 by Ankur Goyal, previously co-founder of Impira and head of

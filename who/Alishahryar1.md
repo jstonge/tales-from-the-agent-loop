@@ -11,7 +11,7 @@ tags:
 
 ## Who
 
-> [!claude] Claude summary
+> [!agent] Claude summary
 > Ali Khokhar, author of Free Claude Code — a proxy that sits where Anthropic's
 > API would be and routes an agent's calls to NVIDIA NIM, OpenRouter, DeepSeek, or
 > a local LM Studio or llama.cpp. MIT-licensed, Python and FastAPI, and widely

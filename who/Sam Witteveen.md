@@ -11,7 +11,7 @@ tags:
 
 ## Who
 
-> [!claude] Claude summary
+> [!agent] Claude summary
 > Co-founder of Red Dragon AI, a machine-learning firm in Singapore, and in 2017
 > one of the first twelve Google Developer Experts for machine learning. His
 > YouTube channel — roughly 135k subscribers across 375 videos, weekly — does

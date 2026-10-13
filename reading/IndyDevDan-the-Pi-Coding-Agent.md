@@ -18,7 +18,7 @@ localCopy: "[[sources/IndyDevDan-the-Pi-Coding-Agent|archived copy]]"
 
 # IndyDevDan-the-Pi-Coding-Agent
 
-> [!claude] Claude summary
+> [!agent] Claude summary
 > IndyDevDan's pitch is that Pi — an open-source, deliberately minimal agent — is the only real Claude Code competitor, and that the argument is about the harness rather than the model. The contrast he draws: Claude Code ships a ~10k-token system prompt, permission modes and a preference for Anthropic models; Pi ships a ~200-token prompt, no safety mode at all ("security in agentic coding is mostly theater"), any model you like, and extensions that let you rewrite the status line, the theme, or bolt on sub-agent support — which Pi genuinely lacks out of the box. He does state the cost honestly: everything you want, you build yourself. The conclusion is hedging rather than switching, so this is less a competitor review than an argument that the harness is the layer you should own.
 
 ## Why do I bring this up?
