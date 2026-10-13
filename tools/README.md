@@ -15,11 +15,10 @@ EOF
 ```
 
 The summary comes in on stdin so it never has to survive shell quoting, and
-lands under the H1 as an attributed blockquote:
+lands under the H1 as an attributed callout:
 
 ```md
-Claude summary:
-
+> [!agent] Claude summary
 > Two or three sentences of summary.
 ```
 
@@ -64,22 +63,19 @@ heading by hand.
 
 ## Layout
 
-`reading/` holds one note per source — what this tool makes. The vault root
-holds your own synthesis notes, written from `my-templates/synthesis.md`:
-no `sourceUrl`, no archive, no `kind`, just your thinking with links out to the
-reading notes it draws on. `--template` routes between them, so
+`reading/` holds one note per source — what this tool makes. `--template`
+routes everything else. `synthesis/` holds surveys compiled across the reading
+notes by `tools/synth`. The vault root is for your own thinking — written, not
+compiled, with no `sourceUrl`, no archive and no `kind`, just links out to the
+reading notes it draws on:
 
 ```sh
-tools/note --slug harness-design-space --template synthesis
+tools/note --slug what-minimal-buys-you --template atomic-notes
 ```
 
-scaffolds one at the root with the date and your name already filled in.
-`synthesis/` holds surveys compiled across the reading notes by `tools/synth`.
-The vault root is for your own thinking — written, not compiled:
-
-```sh
-tools/note --slug what-minimal-buys-you --template thinking
-```
+scaffolds an atomic note — one idea, one author — with the date and your name
+already filled in. It gets no `### <author>` heading: the whole note is
+whoever's in `addedBy`.
 
 `who/` holds people and organisations — who they are, what they've made,
 and which notes here cover them:
@@ -112,7 +108,7 @@ you at the source. `addedBy` is filled from `git config user.name` (falling back
 to `whoami`) and is written only once — re-running on a note a collaborator
 added won't reattribute it, and `--added-by` overrides when you're recording
 something on someone else's behalf. Both are plain fields, so a new one is a line in
-`my-templates/note.md` — the CLI picks it up with no code change, and
+`my-templates/reading.md` — the CLI picks it up with no code change, and
 `--set KEY=VALUE` fills any key whether the template has it or not.
 
 ## Archiving
@@ -125,10 +121,13 @@ links the copy as `localCopy:`.
 Re-running on a note that already exists edits it in place rather than
 rebuilding it from the template: your frontmatter, your tags and anything you
 wrote under `## Why do I bring this up?` survive, and an existing
-`Claude summary:` block is replaced rather than duplicated.
+`> [!agent] … summary` callout is replaced rather than duplicated.
 
 `tools/vault-index` prints the tag vocabulary,
-the grouping by harness, and a one-line gist per note.
+the grouping by harness, and a one-line gist per note. For your notes at the
+root it also counts links in, links out and reading notes cited, and flags the
+ones at zero — plus any group of three or more notes linked to each other with
+no note that gathers them, which is usually where a structure note belongs.
 
 ## Working on this vault with an agent
 

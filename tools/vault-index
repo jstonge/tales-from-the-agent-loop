@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """Print what's already in the vault: the tag vocabulary, the harnesses covered,
 and one line per note. Enough to pick existing tags and spot notes worth linking
-without reading every file."""
+without reading every file.
+
+Your own notes at the root also get their links counted, because an atomic
+note is only as useful as what it connects to: what links in, what it links
+out to, and which reading notes it rests on."""
 
 import sys
 from pathlib import Path
@@ -10,22 +14,73 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import vaultlib as vault  # noqa: E402
 
 
+def link_report(roots):
+    """Per root note, (links in, links out, reading notes cited), plus groups
+    of three or more root notes linked to each other with no note at the hub."""
+    folders = [vault.VAULT, vault.READING, vault.VAULT / "synthesis", vault.VAULT / "who"]
+    out_links = {f.stem: vault.links(f.read_text(encoding="utf-8"))
+                 for d in folders for f in d.glob("*.md") if f.name not in vault.NOT_NOTES}
+    reading = {f.stem for f in vault.READING.glob("*.md")}
+    names = [slug for slug, _, _ in roots]
+
+    counts = {}
+    for name in names:
+        incoming = sum(name in ls for src, ls in out_links.items() if src != name)
+        outgoing = out_links[name] - {name}
+        counts[name] = (incoming, len(outgoing), len(outgoing & reading))
+
+    # connected groups among root notes, links taken in either direction
+    near = {n: {m for m in names if m != n and (m in out_links[n] or n in out_links[m])}
+            for n in names}
+    seen, groups = set(), []
+    for start in names:
+        if start in seen:
+            continue
+        group, todo = set(), [start]
+        while todo:
+            n = todo.pop()
+            if n not in group:
+                group.add(n)
+                todo.extend(near[n] - group)
+        seen |= group
+        # a member that already links to every other one is the structure note
+        hub = any(group - {n} <= out_links[n] for n in group)
+        if len(group) >= 3 and not hub:
+            groups.append(sorted(group))
+    return counts, groups
+
+
 def main():
     notes = vault.reading_notes()
-    skip = {"README.md", "CLAUDE.md", "AGENTS.md"}  # project files, not notes
-    thinking = [f.stem for f in sorted(vault.VAULT.glob("*.md")) if f.name not in skip]
+    roots = vault.root_notes()
     synthesis = [f.stem for f in sorted((vault.VAULT / "synthesis").glob("*.md"))]
-    if not notes and not synthesis and not thinking:
+    if not notes and not synthesis and not roots:
         print("vault is empty")
         return
 
     tags = sorted({t for _, f, _ in notes for t in vault.listed(f, "tags")})
     print("TAGS IN USE:", ", ".join(tags) or "(none)")
 
-    if thinking:
-        print("\nYOUR NOTES (vault root):")
-        for name in thinking:
-            print(f"  {name}")
+    if roots:
+        counts, groups = link_report(roots)
+        print("\nYOUR NOTES (vault root) — links in / out / reading notes cited:")
+        width = max(len(slug) for slug, _, _ in roots)
+        for slug, _, gist in roots:
+            n_in, n_out, n_read = counts[slug]
+            print(f"  {slug:<{width}}  {n_in:>2} /{n_out:>2} /{n_read:>2}   {gist}")
+
+        checks = [
+            ("nothing links here", [s for s, c in counts.items() if not c[0]]),
+            ("links nowhere", [s for s, c in counts.items() if not c[1]]),
+            ("cites no reading note", [s for s, c in counts.items() if not c[2]]),
+        ]
+        if any(found for _, found in checks) or groups:
+            print("\n  to look at:")
+            for label, found in checks:
+                if found:
+                    print(f"    {label}: {', '.join(found)}")
+            for group in groups:
+                print(f"    linked, but no note gathers them: {', '.join(group)}")
 
     if synthesis:
         print("\nSYNTHESIS:")

@@ -62,24 +62,27 @@ EOF
 trip. `--force` is safe here: re-running edits the note in place rather than
 rebuilding it from the template, so the user's frontmatter, tags, and anything
 they wrote under `## Why do I bring this up?` survive, and an existing
-`Claude summary:` block is replaced rather than duplicated.
+`> [!agent] … summary` callout is replaced rather than duplicated.
 
 Summary text goes in on stdin so apostrophes and quotes don't have to survive
 shell escaping. Use a quoted heredoc (`<<'EOF'`) so backticks and `$` stay literal.
 
-## Two kinds of note
+## Where notes go
 
 Reading notes live in `reading/`, one per source, and are what this skill makes.
-The vault root is for the user's own synthesis notes — their thinking across
-several sources, made from `my-templates/synthesis.md`. Those have no
-`sourceUrl`, no archive and no `kind`, and `tools/note` routes on the template:
-`--template reading` (the default) writes to `reading/`, anything else writes to
-the root.
+`tools/note` routes on `--template`:
 
-Don't write synthesis notes unprompted. They're the user's argument, not a
-summary, and the whole point of the split is that one is sourced and the other
-is thought. If asked to start one, scaffold it with
-`tools/note --slug <topic> --template synthesis` and leave the thinking to them.
+- `reading` (the default) → `reading/`
+- `who` → `who/`, people and organisations
+- `synthesis` → `synthesis/`, surveys compiled across reading notes — that's
+  the `vault-synthesis` skill's job, via `tools/synth`, not this one
+- `atomic-notes` → the vault root, the user's own thinking, one idea per note
+
+Atomic notes have no `sourceUrl`, no archive and no `kind`. Don't write them
+unprompted. They're the user's argument, not a summary, and the whole point of
+the split is that one is sourced and the other is thought. If asked to start
+one, scaffold it with `tools/note --slug <topic> --template atomic-notes` and
+leave the thinking to them.
 
 ## Choosing the slug
 
@@ -89,8 +92,8 @@ becomes both the filename and the H1, so it should read as a title, not an ID.
 
 ## Writing the summary
 
-Three to five sentences. The block is labeled `Claude summary:` and rendered as
-a blockquote, so it is explicitly yours — you can make judgments, and you should.
+Three to five sentences. The block is rendered as a `> [!agent] Claude summary`
+callout, so it is explicitly yours — you can make judgments, and you should.
 A summary that only restates the table of contents is worse than useless, because
 the user already has the archived copy sitting next to it.
 
@@ -134,7 +137,7 @@ to a note beyond the summary, label it the same way.
 ## Leave the user's side of the note alone
 
 `## Why do I bring this up?` is theirs. Never write in it, even when you have an
-opinion that would fit — the whole point of the attributed-blockquote split is
+opinion that would fit — the whole point of the attributed-callout split is
 that the reader can tell at a glance which thoughts are whose.
 
 That section is split further by an `### <author name>` heading per person, so
