@@ -40,8 +40,9 @@ def gist(body, limit=110):
     """The note's first sentence — Claude's summary, else the author's own text."""
     m = re.search(r"(?ms)^# .*?\n(.*?)^## ", body)
     text = m[1].strip() if m else ""
-    if text.startswith("Claude summary:"):
-        text = text.split("\n", 1)[-1].strip()
+    # drop the callout header (`> [!agent] Claude summary`) or the older
+    # `Claude summary:` label, so the gist starts at the summary itself
+    text = re.sub(r"^(?:> \[!(?:agent|claude)\][^\n]*|Claude summary:)\n", "", text)
     if not text:
         m = re.search(r"(?ms)^## Why do I bring this up\?\n(.*)\Z", body)
         text = m[1].strip() if m else ""

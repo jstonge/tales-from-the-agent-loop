@@ -82,6 +82,7 @@ agent looks and tell it whose name to sign with:
 
 ```sh
 npx skills add jstonge/tales-from-the-agent-loop --skill vault-note --agent codex
+npx skills add jstonge/tales-from-the-agent-loop --skill vault-synthesis --agent codex
 export VAULT_AGENT=Codex
 ```
 
