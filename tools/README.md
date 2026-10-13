@@ -129,16 +129,39 @@ root it also counts links in, links out and reading notes cited, and flags the
 ones at zero — plus any group of three or more notes linked to each other with
 no note that gathers them, which is usually where a structure note belongs.
 
+## How the pieces fit
+
+The work splits in two: a skill is prose telling the agent what to do, and a
+tool does only what doesn't need judgment. Nothing in `tools/` calls a model —
+if it had to think, your notes would depend on it thinking the same way twice.
+
+```mermaid
+flowchart TD
+    you["you<br/>a URL"] --> skill["skill<br/>what to do, in prose"]
+    skill --> agent["agent<br/>reads the source,<br/>writes the summary"]
+    agent --> note["tools/note<br/>renders, archives"]
+    tpl["my-templates/"] --> note
+    note --> reading["reading/<br/>one note per source"]
+    note --> sources["sources/<br/>archived full text"]
+    reading --> synth["tools/synth<br/>survey across notes"]
+    synth --> surveys["synthesis/<br/>compiled surveys"]
+    surveys -.-> root["the vault root<br/>your own thinking"]
+```
+
+`my-templates/` has two consumers, not one: Obsidian's Templates plugin points
+at the same folder, so adding a field to `reading.md` changes both what the tool
+emits and what you get from **Insert template**, with no code change.
+
 ## Working on this vault with an agent
 
 The conventions live in [`AGENTS.md`](../AGENTS.md), which Codex, Cursor,
 Copilot and others read directly; `CLAUDE.md` is a one-line pointer to it.
 
-Three skills wrap the tools below — `vault-note` turns a URL into a reading
+Three skills wrap these tools — `vault-note` turns a URL into a reading
 note, `vault-synthesis` builds a survey across them, and `vault-review` gives
-hints on one of your atomic notes without editing it. Cloning the repo is enough for
-Claude Code, which loads `.claude/skills/` automatically. For any other agent,
-install them where that agent looks:
+hints on one of your atomic notes without editing it. Cloning the repo is
+enough for Claude Code, which loads `.claude/skills/` automatically. For any
+other agent, install them where that agent looks:
 
 ```sh
 npx skills add jstonge/tales-from-the-agent-loop --skill vault-note --agent codex

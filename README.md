@@ -10,83 +10,51 @@ In this project, we learn about that emerging Agent Loop from a humanistic persp
 
 ## How to get started
 
-Clone it and open the folder as a vault in [Obsidian](https://obsidian.md).
+Clone it and open the folder as a vault in [Obsidian](https://obsidian.md):
 
 ```sh
 git clone https://github.com/jstonge/tales-from-the-agent-loop.git
 ```
 
-One setup step: **Settings → Appearance → CSS snippets → enable `agent-callout`**.
-That's what tints agent-written blocks orange, so you can tell at a glance which
-prose is a person's and which a machine's.
+Then enable **Settings → Appearance → CSS snippets → `agent-callout`**. It tints
+agent-written blocks orange, so you can tell whose words are whose.
 
-To add something you've read, hand your agent the link:
+### Add what you read
+
+Hand your agent the link:
 
 ```
 /vault-note https://tidydesign.substack.com/p/what-is-an-agent
 ```
 
-It fetches the page, saves a readable copy into `sources/` so the note outlives
-the link, fills in the frontmatter, and drafts a summary. The summary is marked
-as the agent's. `## Why do I bring this up?` is left for you, under your own
-name and dated, so two of us can write in one note without overwriting each
-other.
+It archives the page to `sources/`, makes a note in `reading/`, and drafts a
+summary marked as the agent's. `## Why do I bring this up?` is left for you,
+under your own name. Once there are a few, `/vault-synthesis` surveys across
+them — see [`current-harnesses`](synthesis/current-harnesses.md).
 
-Once there are enough notes to compare, `/vault-synthesis` builds a survey
-across them — see [`current-harnesses`](synthesis/current-harnesses.md).
+### Write your own notes
 
-When you have something to say that isn't about any one source, start an
-atomic note at the root instead — one idea per note, linked to the others and
-to the reading it rests on. In Obsidian, make a new note, run **Templates:
-Insert template** from the command palette (Cmd+P), pick `atomic-notes`, and
-put your name in `addedBy`. The whole note is yours; nothing else writes there.
-`tools/vault-index` shows which of your notes nothing links to, which link
-nowhere, and which cite no reading. For hints on one note — whether it stands
-on its own, makes a claim, and links to what it rests on — ask for
-`/vault-review <note>`. It answers in chat and never edits the note.
+Your own thinking goes at the root as atomic notes — one idea each, linked to
+each other and to the reading. Make a new note, run **Templates: Insert
+template** (Cmd+P) → `atomic-notes`, and put your name in `addedBy`. For hints
+on what a note is missing:
 
-Under the hood, the work splits in two: the skill is prose telling the agent
-what to do, and the tool does only what doesn't need judgment. Nothing in
-`tools/` calls a model — if it had to think, your notes would depend on it
-thinking the same way twice.
-
-```mermaid
-flowchart TD
-    you["you<br/>a URL"] --> skill["skill<br/>what to do, in prose"]
-    skill --> agent["agent<br/>reads the source,<br/>writes the summary"]
-    agent --> note["tools/note<br/>renders, archives"]
-    tpl["my-templates/"] --> note
-    note --> reading["reading/<br/>one note per source"]
-    note --> sources["sources/<br/>archived full text"]
-    reading --> synth["tools/synth<br/>survey across notes"]
-    synth --> surveys["synthesis/<br/>compiled surveys"]
-    surveys -.-> root["the vault root<br/>your own thinking"]
+```
+/vault-review grant-discovery-loop
 ```
 
-`my-templates/` has two consumers, not one: Obsidian's Templates plugin points
-at the same folder, so adding a field to `reading.md` changes both what the tool
-emits and what you get from **Insert template**, with no code change.
+It answers in chat and never edits the note.
 
-Where things live:
+### Where things live
 
 | | |
 | --- | --- |
-| `reading/` | one note per thing read |
-| `who/` | the people and organisations behind them |
-| `synthesis/` | surveys compiled across the reading notes |
-| `sources/` | archived full text, so nothing depends on a live URL |
 | the root | our own thinking, one atomic note per idea |
+| `reading/` | one note per thing read |
+| `synthesis/` | surveys compiled across the reading notes |
+| `who/` | the people and organisations behind them |
+| `sources/` | archived full text, so nothing depends on a live URL |
 
-If you work with something other than Claude Code, install the skills where your
-agent looks and tell it whose name to sign with:
-
-```sh
-npx skills add jstonge/tales-from-the-agent-loop --skill vault-note --agent codex
-npx skills add jstonge/tales-from-the-agent-loop --skill vault-synthesis --agent codex
-npx skills add jstonge/tales-from-the-agent-loop --skill vault-review --agent codex
-export VAULT_AGENT=Codex
-```
-
-The conventions are in [AGENTS.md](AGENTS.md), and the CLI underneath the skills
-is documented in [tools/README.md](tools/README.md).
-
+The conventions agents follow are in [AGENTS.md](AGENTS.md). Using something
+other than Claude Code, or curious how it works underneath? See
+[tools/README.md](tools/README.md).
