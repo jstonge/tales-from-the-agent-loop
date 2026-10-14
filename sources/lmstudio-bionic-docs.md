@@ -1,0 +1,33 @@
+---
+sourceUrl: https://lmstudio.ai/docs/bionic
+fetched: 2026-10-14
+source: article text
+---
+
+# Welcome to LM Studio Bionic
+
+Introducing Bionic, the AI agent designed for open models.
+
+Meet LM Studio Bionic, the next generation of LM Studio designed for agentic work with open models.
+
+Bionic is the AI agent for getting real work done with open models, including coding, research, and complex work with documents and files. You can use local models or switch to open-source models in the cloud for heavier tasks, all while staying in control of your privacy and AI spend.
+
+## What you can do
+
+Bionic is an excellent agentic harness, especially for coding and working with documents.
+
+Within a project, create separate sessions for separate tasks. Run multiple sessions across projects to parallelize your workflows.
+
+## Choose where a model runs
+
+A Bionic session can use:
+
+- **Frontier open models** running in LM Studio Secure Cloud with Zero Data Retention.
+- **Local** models running on your computer.
+- **Remote** models from another device through LM Link.
+
+## How this differs from LM Studio
+
+Bionic is a new, separate app from LM Studio. For advanced low-level configuration, you can continue to use LM Studio alongside Bionic.
+
+Download Bionic and create your first project to get started!
