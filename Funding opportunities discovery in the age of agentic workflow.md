@@ -5,6 +5,8 @@ date: 2026-10-13
 addedBy: Jonathan St-Onge
 tags:
 ---
+Grant discovery is one of the core features of the "Horizon" project. Depending on how savvy is someone with agentic workflow, the human loop can be fully automated in that an agent can know everything there is to know about you and current funding opportunities and assess fit between yourself and specific grants. By in doing so, the agent would forego domain expertise from research staff. 
+
 ## Current loop
 
 Here's what grant discovery at UVM look like right now, as a loop

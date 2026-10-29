@@ -1,0 +1,34 @@
+
+2026-10-14
+
+- **UVM forms and procedures** (aka compliance)
+	- Docs Q&A: `question` $\rightarrow$ answer
+		- ==evals==
+			- Evaluating triplets (questions, docs, facts)
+	- tailored 
+		- "what if i want to do X on my grant Y while doing Z"
+- **grant discovery** (see atomsgrants)
+	- data extraction
+		- federal (easy enough)
+		- non-federal (e.g. foundations, private, nonprofits, etc; much harder to discover)
+			- crawling -> structured output
+	- grant recommendations
+		- `PI` $\rightarrow$ opportunity
+			- deterministic filters
+				- non-eligible grants
+			- ==evals==
+				- [x] take all awards up to a point, then see if we retrieve the awarded funding opportunity as part of our pipeline
+		- TEAM $\rightarrow$ opportunity
+			- define team
+				- [ ] p(collab recs | opportunity). that is, who would be a good partner on a given funding opportunity
+- **pre-award management** (see origamigrants and atomsgrants): 
+	-  checklist: extracting task items
+		- build on compliance checks
+	-  timeline
+	-  budget
+	-  draft
+	-  letters & routing 
+- **post-award management**:
+	- budget changes
+	- compliance questions
+- **commercialization** (award $\rightarrow$ money)
